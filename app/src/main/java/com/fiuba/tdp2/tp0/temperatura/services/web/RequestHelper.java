@@ -21,7 +21,7 @@ public class RequestHelper {
 
         if (error instanceof TimeoutError || error instanceof NoConnectionError) {
 
-            errorDesc = "El servidor tardo mucho en responder";
+            errorDesc = "No fue posible conectarse al servidor, por favor intente mas tarde";
 
         } else if (error instanceof AuthFailureError) {
 
@@ -59,7 +59,7 @@ public class RequestHelper {
             errorDesc = "Error desconocido. ";
 
         }
-        return new Pair<Integer, String>(codError, errorDesc);
+        return new Pair<>(codError, errorDesc);
     }
 
     public static Map getHeaders() {
