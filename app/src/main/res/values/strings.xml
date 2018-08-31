@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Temperatura</string>
+
+    <array name="imagenes_clima">
+        <item>@drawable/lluvia</item>
+    </array>
 </resources>
