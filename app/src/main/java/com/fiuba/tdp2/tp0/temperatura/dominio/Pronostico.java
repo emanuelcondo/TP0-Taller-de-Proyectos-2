@@ -6,6 +6,9 @@ public class Pronostico {
     private int temperaturaMinima;
     private int imagen;
 
+    public Pronostico(){
+
+    }
     public Pronostico(String dia, int temperaturaMaxima, int temperaturaMinima, int imagen) {
         this.setDia(dia);
         this.setTemperaturaMaxima(temperaturaMaxima);
