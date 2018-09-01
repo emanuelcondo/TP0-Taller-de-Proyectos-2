@@ -18,6 +18,11 @@ import com.fiuba.tdp2.tp0.temperatura.services.web.RequestSender;
 import com.fiuba.tdp2.tp0.temperatura.vista.PronosticoAdapter;
 
 import java.util.ArrayList;
+import java.util.Dictionary;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -55,14 +60,15 @@ public class MainActivity extends AppCompatActivity {
     //TODO: Borrar esto
     private void mockearPronosticos() {
         String[] dias = {"Lunes", "Martes", "Miércoles", "Jueves", "Viernes"};
-        Integer[] tempMaximas = {15, 22, 25, 11, 8};
-        Integer[] tempMinimas = {11, 16, 18, 5, 1};
+        Random r = new Random();
+        Integer[] tempMaximas = {r.nextInt(20), r.nextInt(26), r.nextInt(15), r.nextInt(32), r.nextInt(9)};
+        Integer[] tempMinimas = {r.nextInt(11), r.nextInt(16), r.nextInt(5), r.nextInt(7), r.nextInt(8)};
         TypedArray imagenesClima = getResources().obtainTypedArray(R.array.imagenes_clima);
 
         pronosticos.clear(); //ojo no hacer new aca ni en el definitivo
 
         for (int i = 0 ; i < dias.length ; ++i) {
-            pronosticos.add(new Pronostico(dias[i], tempMaximas[i], tempMinimas[i], imagenesClima.getResourceId(0, 0)));
+            pronosticos.add(new Pronostico(dias[i], tempMaximas[i], tempMinimas[i], imagenesClima.getResourceId(r.nextInt(18), 0)));
         }
 
         imagenesClima.recycle();

@@ -10,10 +10,10 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:padding="4dp"
             android:id="@+id/imagenPronostico"
-            android:adjustViewBounds="true"
             android:contentDescription="@string/app_name" />
         <TextView
             android:layout_width="wrap_content"
@@ -21,21 +21,24 @@
             android:id="@+id/dia"
             android:padding="8dp"
             style="@style/TextAppearance.AppCompat.Headline"
-            android:layout_alignBottom ="@id/imagenPronostico" />
+            android:layout_toRightOf="@id/imagenPronostico"
+            android:layout_toEndOf="@+id/imagenPronostico"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/tempMax"
             android:padding="8dp"
             style="@style/TextAppearance.AppCompat.Subhead"
-            android:layout_below="@id/imagenPronostico" />
+            android:layout_toRightOf="@id/imagenPronostico"
+            android:layout_toEndOf="@+id/imagenPronostico"
+            android:layout_below="@+id/dia"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/tempMin"
             android:padding="8dp"
             style="@style/TextAppearance.AppCompat.Subhead"
-            android:layout_below="@id/imagenPronostico"
+            android:layout_below="@id/dia"
             android:layout_toRightOf="@id/tempMax"
             android:layout_toEndOf="@id/tempMax" />
 

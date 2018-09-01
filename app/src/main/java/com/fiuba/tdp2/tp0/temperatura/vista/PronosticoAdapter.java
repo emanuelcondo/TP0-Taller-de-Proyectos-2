@@ -14,6 +14,7 @@ import com.fiuba.tdp2.tp0.temperatura.R;
 import com.fiuba.tdp2.tp0.temperatura.dominio.Pronostico;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class PronosticoAdapter extends RecyclerView.Adapter<PronosticoAdapter.ViewHolder> {
 
@@ -32,7 +33,10 @@ public class PronosticoAdapter extends RecyclerView.Adapter<PronosticoAdapter.Vi
 
     public void onBindViewHolder(@NonNull PronosticoAdapter.ViewHolder holder, int posicion) {
         Pronostico pronostico = pronosticos.get(posicion);
-        Glide.with(contexto).load(pronostico.getImagen()).into(holder.imagenClimaView);
+        Glide
+                .with(contexto)
+                .load(pronostico.getImagen())
+                .into(holder.imagenClimaView);
         holder.bindTo(pronostico);
     }
 
@@ -59,8 +63,8 @@ public class PronosticoAdapter extends RecyclerView.Adapter<PronosticoAdapter.Vi
 
         void bindTo(Pronostico pronostico){
             diaText.setText(pronostico.getDia());
-            tempMaxText.setText(Integer.toString(pronostico.getTemperaturaMaxima()).concat("º"));
-            tempMinText.setText(Integer.toString(pronostico.getTemperaturaMinima()).concat("º"));
+            tempMaxText.setText(String.format(Locale.getDefault(), "%d", pronostico.getTemperaturaMaxima()).concat("º"));
+            tempMinText.setText(String.format(Locale.getDefault(), "%d", pronostico.getTemperaturaMinima()).concat("º"));
         }
     }
 
