@@ -12,6 +12,8 @@ package com.fiuba.tdp2.tp0.temperatura.services.listeners;
         import org.json.JSONArray;
         import org.json.JSONException;
 
+        import java.util.List;
+
 //        import ar.com.fiuba.tddp1.gestorvida.dominio.Actividad;
 //        import ar.com.fiuba.tddp1.gestorvida.dominio.ActividadFactory;
 //        import ar.com.fiuba.tddp1.gestorvida.dominio.Perfil;
@@ -19,6 +21,8 @@ package com.fiuba.tdp2.tp0.temperatura.services.listeners;
 public class PronosticosListener implements ResponseListener {
 
     private Context context;
+
+    private List<Pronostico> pronosticos;
 
     public PronosticosListener(Context context) {
         this.context = context;
@@ -33,10 +37,12 @@ public class PronosticosListener implements ResponseListener {
 
                 //Log.d("ActividadesListener", "Actividad " + i);
                 Pronostico pronostico = PronosticoFactory.fromJSONObject(array.getJSONObject(i));
+                getPronosticos().add(pronostico);
                 //Perfil.agregarActividad(actividad);
 
             } catch (JSONException e) {
                 Log.d("ActividadesListener", e.getMessage());
+                Toast.makeText(context, "Error ActividadesListener: " + e.getMessage(), Toast.LENGTH_LONG).show();
             }
 
         }
@@ -53,4 +59,11 @@ public class PronosticosListener implements ResponseListener {
     }
 
 
+    public List<Pronostico> getPronosticos() {
+        return pronosticos;
+    }
+
+    public void setPronosticos(List<Pronostico> pronosticos) {
+        this.pronosticos = pronosticos;
+    }
 }

@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">Temperatura</string>
     <string name="action_settings">Ciudades</string>
+    <string name="ciudad_harcodeada"> - Avellaneda</string>
+    <string name="url">http://api.openweathermap.org/data/2.5/forecast</string>
+    <string name="appid">13d33da11295c179f0b705613b2d6f18</string>
 
     <array name="imagenes_clima">
         <item>@drawable/lluvia</item>

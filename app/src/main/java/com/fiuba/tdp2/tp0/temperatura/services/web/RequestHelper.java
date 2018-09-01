@@ -19,13 +19,16 @@ public class RequestHelper {
         String errorDesc;
         Integer codError = 0;
 
+
+
         if (error instanceof TimeoutError || error instanceof NoConnectionError) {
 
-            errorDesc = "No fue posible conectarse al servidor, por favor intente mas tarde";
+            errorDesc = "No fue posible conectarse al servidor, por favor intente mas tarde. ";
 
         } else if (error instanceof AuthFailureError) {
 
             errorDesc = "Error de autenticacion";
+
 
         } else if (error instanceof ServerError) {
 
@@ -59,6 +62,8 @@ public class RequestHelper {
             errorDesc = "Error desconocido. ";
 
         }
+
+        errorDesc  = errorDesc + ":" +error.getMessage();
         return new Pair<>(codError, errorDesc);
     }
 

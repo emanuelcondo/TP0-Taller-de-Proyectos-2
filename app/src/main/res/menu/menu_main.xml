@@ -9,4 +9,10 @@
         android:orderInCategory="100"
         android:title="@string/action_settings"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/harcodeada"
+        android:orderInCategory="100"
+        android:title="@string/ciudad_harcodeada"
+        app:showAsAction="never" />
+
 </menu>
