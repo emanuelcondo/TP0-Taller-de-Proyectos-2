@@ -7,10 +7,10 @@ public class Pronostico {
     private int imagen;
 
     public Pronostico(String dia, int temperaturaMaxima, int temperaturaMinima, int imagen) {
-        this.dia = dia;
-        this.temperaturaMaxima = temperaturaMaxima;
-        this.temperaturaMinima = temperaturaMinima;
-        this.imagen = imagen;
+        this.setDia(dia);
+        this.setTemperaturaMaxima(temperaturaMaxima);
+        this.setTemperaturaMinima(temperaturaMinima);
+        this.setImagen(imagen);
     }
 
     public String getDia() {
@@ -27,5 +27,21 @@ public class Pronostico {
 
     public int getImagen() {
         return imagen;
+    }
+
+    public void setDia(String dia) {
+        this.dia = dia;
+    }
+
+    public void setTemperaturaMaxima(int temperaturaMaxima) {
+        this.temperaturaMaxima = temperaturaMaxima;
+    }
+
+    public void setTemperaturaMinima(int temperaturaMinima) {
+        this.temperaturaMinima = temperaturaMinima;
+    }
+
+    public void setImagen(int imagen) {
+        this.imagen = imagen;
     }
 }
