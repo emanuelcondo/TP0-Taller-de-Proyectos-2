@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.fiuba.tdp2.tp0.temperatura.dominio.Pronostico;
+import com.fiuba.tdp2.tp0.temperatura.services.listeners.PronosticosListener;
 import com.fiuba.tdp2.tp0.temperatura.vista.PronosticoAdapter;
 
 import java.util.ArrayList;
@@ -21,6 +22,8 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private ArrayList<Pronostico> pronosticos;
     private PronosticoAdapter pronosticoAdapter;
+
+    private PronosticosListener pronosticoslistener;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
         pronosticoAdapter = new PronosticoAdapter(this, pronosticos);
         recyclerView.setAdapter(pronosticoAdapter);
         mockearPronosticos();
+
+        pronosticoslistener = new PronosticosListener(this);
     }
 
     //TODO: Borrar esto
