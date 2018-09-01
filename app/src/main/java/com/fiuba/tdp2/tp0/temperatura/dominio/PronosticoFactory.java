@@ -4,7 +4,7 @@ package com.fiuba.tdp2.tp0.temperatura.dominio;
 
 import android.util.Log;
 
-//import org.json.JSONArray;
+import org.json.JSONArray;
 import com.fiuba.tdp2.tp0.temperatura.R;
 
 import org.json.JSONException;
@@ -18,6 +18,8 @@ import org.json.JSONObject;
 public  class PronosticoFactory {
 
     public static Pronostico fromJSONObject(JSONObject jsonObject) throws JSONException {
+
+
 
         String diaPronostico = String.format("%1$-3s", jsonObject.getString("nombre"));
         Pronostico pronostico;

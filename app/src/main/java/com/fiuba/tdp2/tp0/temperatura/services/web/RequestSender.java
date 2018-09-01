@@ -42,13 +42,19 @@ public class RequestSender {
 
     }
 
-    public void doGet(final ResponseListener listener, String url){
+    public void doGet_expectArray(final ResponseListener listener, String url){
         Log.d("RequestSender", "Sending get to " + url );
 
         doRequest(new CustomJsonArrayRequest(url, listener));
 
     }
 
+    public void doGet_expectSingleObject(final ResponseListener listener, String url){
+        Log.d("RequestSender", "Sending get to " + url );
+
+        doRequest(new CustomJsonObjetRequest(Request.Method.GET, url, null, listener));
+
+    }
     public void doDelete(final ResponseListener listener, String url){
         Log.d("RequestSender", "Deleting from " + url);
 
@@ -56,13 +62,13 @@ public class RequestSender {
 
     }
 
-    public void doPut(final ResponseListener listener, String url, JSONObject jsonObject) {
+    public void doPut_expectSingleObject(final ResponseListener listener, String url, JSONObject jsonObject) {
         Log.d("RequestSender", "Put to " + url);
         doRequest(new CustomJsonObjetRequest(Request.Method.PUT, url, jsonObject, listener));
     }
 
 
-    public void doPostGetArray(final ResponseListener listener, String url, final JSONObject jsonObject){
+    public void doPost_expectArray(final ResponseListener listener, String url, final JSONObject jsonObject){
         Log.d("RequestSender", "Sending postGetArray to " + url + " params " + jsonObject.toString());
 
         JsonRequest<JSONArray> request;

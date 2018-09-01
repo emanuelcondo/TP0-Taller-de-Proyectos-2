@@ -44,6 +44,9 @@ public class RequestHelper {
                 case 404:
                     errorDesc = "La url invocada no corresponde a un servicio valido";
                     break;
+                case 405:
+                    errorDesc = "La url invocada no acepta el tipo de operacion dado";
+                    break;
                 default:
                     errorDesc = new String(error.networkResponse.data);
 

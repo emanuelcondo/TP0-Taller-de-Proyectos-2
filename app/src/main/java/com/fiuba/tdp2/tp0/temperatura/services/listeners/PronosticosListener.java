@@ -11,6 +11,7 @@ package com.fiuba.tdp2.tp0.temperatura.services.listeners;
 
         import org.json.JSONArray;
         import org.json.JSONException;
+        import org.json.JSONObject;
 
         import java.util.List;
 
@@ -30,8 +31,10 @@ public class PronosticosListener implements ResponseListener {
     @Override
     public void onRequestCompleted(Object response) {
 
-        JSONArray array = (JSONArray)response;
         Log.d("ActividadesListener", response.toString());
+        /*
+        JSONArray array = (JSONArray)response;
+
         for (int i = 0; i < array.length(); i++) {
             try {
 
@@ -48,13 +51,42 @@ public class PronosticosListener implements ResponseListener {
         }
 
         Log.d("ActividadesListener", response.toString());
+        */
         //Toast.makeText(context, response.toString(), Toast.LENGTH_LONG).show();
+
+        try {
+            JSONObject jsonObject = (JSONObject)response;
+//            JSONArray allForecasts = jsonObject.getJSONArray("list");
+
+            /*for (int i = 0; i < allForecasts.length(); i++) {
+                Pronostico pronostico = PronosticoFactory.fromJSONObject(allForecasts.getJSONObject(i));
+                getPronosticos().add(pronostico);
+//                Beneficio beneficio = new Beneficio();
+//                JSONObject jo = benef.getJSONObject(i);
+//                beneficio.setDescripcion(jo.getString("descripcion"));
+//                beneficio.setDescuento(jo.getDouble("descuento"));
+//                beneficio.setPrecio(jo.getDouble("precio"));
+//                pronostico.addBeneficio(beneficio);
+            }*/
+            Log.d("PronosticoListener", "Sarasa");
+
+
+
+            Log.d("PronosticoListener", "Resultado: " + jsonObject.getString("cod"));
+
+            Log.d("PronosticoListener", "Posterior");
+
+
+        } catch (JSONException e) {
+            Log.e("PronosticoListener", e.getMessage());
+            Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override
     public void onRequestError(int codError, String errorMessage) {
         String error = codError + ": " + errorMessage;
-        Log.d("ActividadesListener", error);
+        Log.d("PronosticoListener", error);
         Toast.makeText(context, error, Toast.LENGTH_LONG).show();
     }
 

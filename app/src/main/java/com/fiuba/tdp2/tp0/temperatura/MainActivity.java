@@ -18,10 +18,6 @@ import com.fiuba.tdp2.tp0.temperatura.services.web.RequestSender;
 import com.fiuba.tdp2.tp0.temperatura.vista.PronosticoAdapter;
 
 import java.util.ArrayList;
-import java.util.Dictionary;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -122,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
 
             String url = getString(R.string.url) + "?id=" + idCiudad + "&units=metric&APPID=" + appid;
 
-            requestSender.doGet(pronosticoslistener, url);
+            requestSender.doGet_expectSingleObject(pronosticoslistener, url);
 
             // pronosticosCacheados.put(idCiudad, pronosticos);
         //}
