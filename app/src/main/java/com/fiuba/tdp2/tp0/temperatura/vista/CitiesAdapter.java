@@ -73,7 +73,8 @@ public class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.ViewHolder
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(v.getContext(), MainActivity.class);
-                    intent.putExtra("city_id", city_id);
+                    MainActivity.idCiudadActual = city_id;
+                    MainActivity.nombreCiudadActual = cityNameText.getText().toString();
                     v.getContext().startActivity(intent);
                 }
             });

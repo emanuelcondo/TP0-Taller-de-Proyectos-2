@@ -41,8 +41,8 @@ public class MainActivity extends AppCompatActivity {
 
     private PronosticosListener pronosticoslistener;
 
-    private int idCiudadActual = 3435910; //por default se muestra buenos aires
-    private  String nombreCiudadActual = "Buenos Aires";
+    public static int idCiudadActual = 3435910; //por default se muestra buenos aires
+    public static String nombreCiudadActual = "Buenos Aires";
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
