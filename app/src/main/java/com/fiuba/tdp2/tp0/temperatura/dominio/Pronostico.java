@@ -90,8 +90,8 @@ ID 	Meaning
 804 	overcast clouds
 
          */
-        //return imagen;
-        return R.array.imagenes_clima;
+        return imagen;
+        // return R.array.imagenes_clima;
     }
 
     public void setDiaHora(String diaHora) {
@@ -118,5 +118,21 @@ ID 	Meaning
     @Override
     public String toString() {
         return diaHora + " - min: " + temperaturaMinima + " - max: " + temperaturaMaxima + " img: " + imagen;
+    }
+
+    public int getYear() {
+        return Integer.parseInt(this.getDiaHora().substring(0, 4));
+    }
+
+    public int getDay() {
+        return Integer.parseInt(this.getDiaHora().substring(8, 10));
+    }
+
+    public int getHour() {
+        return Integer.parseInt(this.getDiaHora().substring(11, 13));
+    }
+
+    public int getMonth() {
+        return Integer.parseInt(this.getDiaHora().substring(5, 7));
     }
 }

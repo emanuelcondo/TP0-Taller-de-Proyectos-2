@@ -9,38 +9,48 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:padding="4dp"
-            android:id="@+id/imagenPronostico"
-            android:contentDescription="@string/app_name" />
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:id="@+id/dia"
             android:padding="8dp"
-            style="@style/TextAppearance.AppCompat.Headline"
-            android:layout_toRightOf="@id/imagenPronostico"
-            android:layout_toEndOf="@+id/imagenPronostico"/>
+            style="@style/TextAppearance.AppCompat.Medium" />
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:padding="4dp"
+            android:id="@+id/imagenDia"
+            android:contentDescription="@string/app_name"
+            android:layout_toRightOf="@id/dia"
+            android:layout_toEndOf="@+id/dia" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/tempMax"
+            android:id="@+id/tempDia"
             android:padding="8dp"
             style="@style/TextAppearance.AppCompat.Subhead"
-            android:layout_toRightOf="@id/imagenPronostico"
-            android:layout_toEndOf="@+id/imagenPronostico"
-            android:layout_below="@+id/dia"/>
+            android:layout_toRightOf="@id/imagenDia"
+            android:layout_toEndOf="@+id/imagenDia" />
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:padding="4dp"
+            android:id="@+id/imagenNoche"
+            android:contentDescription="@string/app_name"
+            android:layout_toRightOf="@id/tempDia"
+            android:layout_toEndOf="@+id/tempDia" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/tempMin"
+            android:id="@+id/tempNoche"
             android:padding="8dp"
             style="@style/TextAppearance.AppCompat.Subhead"
-            android:layout_below="@id/dia"
-            android:layout_toRightOf="@id/tempMax"
-            android:layout_toEndOf="@id/tempMax" />
+            android:layout_toRightOf="@id/imagenNoche"
+            android:layout_toEndOf="@id/imagenNoche" />
 
     </RelativeLayout>
 </android.support.v7.widget.CardView>

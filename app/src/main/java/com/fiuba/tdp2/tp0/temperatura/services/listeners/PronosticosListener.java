@@ -6,9 +6,10 @@ package com.fiuba.tdp2.tp0.temperatura.services.listeners;
         import android.widget.Toast;
 
         import com.fiuba.tdp2.tp0.temperatura.dominio.Pronostico;
+        import com.fiuba.tdp2.tp0.temperatura.dominio.PronosticoDelDia;
         import com.fiuba.tdp2.tp0.temperatura.dominio.PronosticoFactory;
         import com.fiuba.tdp2.tp0.temperatura.services.web.ResponseListener;
-        import com.fiuba.tdp2.tp0.temperatura.vista.PronosticoAdapter;
+        import com.fiuba.tdp2.tp0.temperatura.vista.PronosticoDelDiaAdapter;
 
         import org.json.JSONArray;
         import org.json.JSONException;
@@ -26,9 +27,9 @@ public class PronosticosListener implements ResponseListener {
 
     private List<Pronostico> pronosticos;
     private List<Pronostico> pronosticosPrevios;
-    private PronosticoAdapter pronosticoAdapter;
+    private PronosticoDelDiaAdapter pronosticoAdapter;
 
-    public PronosticosListener(Context context, PronosticoAdapter pronosticoAdapter) {
+    public PronosticosListener(Context context, PronosticoDelDiaAdapter pronosticoAdapter) {
         this.context = context;
         this.pronosticoAdapter = pronosticoAdapter;
     }

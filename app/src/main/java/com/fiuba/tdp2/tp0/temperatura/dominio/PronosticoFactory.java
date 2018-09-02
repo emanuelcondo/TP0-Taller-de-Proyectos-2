@@ -19,9 +19,10 @@ import java.util.Date;
 
 public  class PronosticoFactory {
 
+    /*
     /**
      * Dado un JSON con los proximos 5 dias, calcula y devuelve los objetos PronosticoDelDia adecuados
-     */
+
     public static Vector<PronosticoDelDia> deJSON(JSONObject pronostico5DiasJSON) throws JSONException {
         int cantidad = pronostico5DiasJSON.getInt("cnt");
         JSONArray lista = pronostico5DiasJSON.getJSONArray("list");
@@ -51,13 +52,13 @@ public  class PronosticoFactory {
      * Dado un JSON con los proximos 5 dias, y el pronostico actual
      * calcula y devuelve los objetos PronosticoDelDia adecuados
      * Este método modifica el pronostico5DiasJSON recibido y le agrega un elemento
-     */
+
     public static Vector<PronosticoDelDia> deJSON(JSONObject pronostico5DiasJSON, JSONObject pronositcoActual) throws JSONException {
         JSONArray lista = pronostico5DiasJSON.getJSONArray("list");
         lista.put(0, pronositcoActual);
         return deJSON(pronostico5DiasJSON);
     }
-
+*/
     public static Pronostico fromJSONObject(JSONObject jsonObject) throws JSONException {
 
         /*

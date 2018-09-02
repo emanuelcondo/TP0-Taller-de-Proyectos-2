@@ -13,11 +13,16 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.fiuba.tdp2.tp0.temperatura.dominio.Pronostico;
+import com.fiuba.tdp2.tp0.temperatura.dominio.PronosticoDelDia;
 import com.fiuba.tdp2.tp0.temperatura.services.listeners.PronosticosListener;
 import com.fiuba.tdp2.tp0.temperatura.services.web.RequestSender;
-import com.fiuba.tdp2.tp0.temperatura.vista.PronosticoAdapter;
+import com.fiuba.tdp2.tp0.temperatura.vista.PronosticoDelDiaAdapter;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
@@ -25,10 +30,12 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private Toolbar toolbar;
 
-    private PronosticoAdapter pronosticoAdapter;
+    private PronosticoDelDiaAdapter pronosticoDelDiaAdapter;
 
     //lista con todos los pronosticos para la ultima ciudad consultada
     private ArrayList<Pronostico> pronosticos;
+    //lista de los 5 pronosticos a mostrar
+    private ArrayList<PronosticoDelDia> pronosticosParaMostrar;
     // si se consulta dos veces la misma ciudad no voy al servidor sino que levanto de aca
     private SparseArray<Pronostico> pronosticosCacheados;
 
@@ -47,12 +54,19 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         pronosticos = new ArrayList<>();
+        pronosticosParaMostrar = new ArrayList<>();
         pronosticosCacheados = new SparseArray<>();
-        pronosticoAdapter = new PronosticoAdapter(this, pronosticos);
-        recyclerView.setAdapter(pronosticoAdapter);
-        //mockearPronosticos();
+        pronosticoDelDiaAdapter = new PronosticoDelDiaAdapter(this, pronosticosParaMostrar);
+        recyclerView.setAdapter(pronosticoDelDiaAdapter);
+        mockearPronosticos();
 
-        pronosticoslistener = new PronosticosListener(this, pronosticoAdapter);
+        try {
+            mostrarPronosticos();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        pronosticoslistener = new PronosticosListener(this, pronosticoDelDiaAdapter);
         pronosticoslistener.setPronosticos(pronosticos);
         refrescarCiudadActual();
     }
@@ -75,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
 
 //        imagenesClima.recycle();
 
-        pronosticoAdapter.notifyDataSetChanged();
+        pronosticoDelDiaAdapter.notifyDataSetChanged();
     }
 
     private void generarPronosticoRandom(String hora, String dia) {
@@ -86,6 +100,57 @@ public class MainActivity extends AppCompatActivity {
         randomMax = 15.4 + (38.7 - 15.4) * r.nextDouble();
 
         pronosticos.add(new Pronostico("2018-09-"+dia+" " +hora+":00:00", randomMin, randomMax, 800));
+    }
+
+    private void mostrarPronosticos() throws ParseException {
+        PronosticoDelDia pronosticoParaMostrar = new PronosticoDelDia();
+        int diaActual = -1;
+        int mesActual = -1;
+        int anioActual = -1;
+        double temperaturaDia = 0;
+        double temperaturaNoche = 0;
+        int contadorParaPromediosDia = 0;
+        int contadorParaPromediosNoche = 0;
+        int contadorParaDiasDePronostico = 0;
+        String[] nombresDePronosticos = {"Hoy", "Mañana"};
+        for (Pronostico pronostico: pronosticos) {
+            int dia = pronostico.getDay();
+            int hora = pronostico.getHour();
+            if (dia != diaActual) {
+                if (contadorParaPromediosNoche != 0) {
+                    if (contadorParaDiasDePronostico == 0 || contadorParaDiasDePronostico == 1)
+                        pronosticoParaMostrar.setNombreDia(nombresDePronosticos[contadorParaDiasDePronostico]);
+                    else {
+                        // First convert to Date. This is one of the many ways.
+                        String dateString = String.format(Locale.getDefault(), "%d-%d-%d", anioActual, mesActual, diaActual);
+                        Date date = new SimpleDateFormat("yyyy-M-d").parse(dateString);
+                        String dayOfWeek = new SimpleDateFormat("EEEE", Locale.getDefault()).format(date);
+                        pronosticoParaMostrar.setNombreDia(dayOfWeek.substring(0,1).toUpperCase() + dayOfWeek.substring(1));
+                    }
+                    pronosticoParaMostrar.setTemperaturaDia(temperaturaDia / contadorParaPromediosDia);
+                    pronosticoParaMostrar.setTemperaturaNoche(temperaturaNoche / contadorParaPromediosNoche);
+                    pronosticoParaMostrar.setImagenDia(pronostico.getImagen());
+                    pronosticoParaMostrar.setImagenNoche(pronostico.getImagen());
+                    pronosticosParaMostrar.add(pronosticoParaMostrar);
+                    temperaturaDia = 0;
+                    temperaturaNoche = 0;
+                    contadorParaPromediosDia = 0;
+                    contadorParaPromediosNoche = 0;
+                    ++contadorParaDiasDePronostico;
+                }
+                pronosticoParaMostrar = new PronosticoDelDia();
+                diaActual = pronostico.getDay();
+                mesActual = pronostico.getMonth();
+                anioActual = pronostico.getYear();
+            }
+            if ( hora >= 6 && hora < 20 ) {
+                temperaturaDia += (pronostico.getTemperaturaMaxima() + pronostico.getTemperaturaMinima()) / 2;
+                ++contadorParaPromediosDia;
+            } else {
+                temperaturaNoche += (pronostico.getTemperaturaMaxima() + pronostico.getTemperaturaMinima()) / 2;
+                ++contadorParaPromediosNoche;
+            }
+        }
     }
 
     public void refreshPronostico(View view) {
