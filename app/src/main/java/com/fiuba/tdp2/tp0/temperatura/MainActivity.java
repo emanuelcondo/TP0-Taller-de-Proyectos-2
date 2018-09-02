@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle(nombreCiudadActual);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(nombreCiudadActual);
 
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -94,8 +95,8 @@ public class MainActivity extends AppCompatActivity {
                         String dateString = String.format(Locale.getDefault(), "%d-%d-%d", anioActual, mesActual, diaActual);
                         try {
                             date = new SimpleDateFormat("yyyy-M-d").parse(dateString);//ParseException
-                            String dayOfWeek = new SimpleDateFormat("EEEE", Locale.getDefault()).format(date);
-                            pronosticoParaMostrar.setNombreDia(dayOfWeek.substring(0,1).toUpperCase() + dayOfWeek.substring(1));
+                            String dayOfWeek = new SimpleDateFormat("EEEE", new Locale("es")).format(date);
+                            pronosticoParaMostrar.setNombreDia(dayOfWeek.substring(0,1).toUpperCase() + dayOfWeek.substring(1) + ",\n"  + diaActual + "/" + mesActual);
                         } catch (ParseException e) {
                             pronosticoParaMostrar.setNombreDia("ErrorParseo");
                         }
@@ -133,8 +134,8 @@ public class MainActivity extends AppCompatActivity {
         String dateString = String.format(Locale.getDefault(), "%d-%d-%d", anioActual, mesActual, diaActual);
         try {
             date = new SimpleDateFormat("yyyy-M-d").parse(dateString);//ParseException
-            String dayOfWeek = new SimpleDateFormat("EEEE", Locale.getDefault()).format(date);
-            pronosticoParaMostrar.setNombreDia(dayOfWeek.substring(0,1).toUpperCase() + dayOfWeek.substring(1));
+            String dayOfWeek = new SimpleDateFormat("EEEE", new Locale("es")).format(date);
+            pronosticoParaMostrar.setNombreDia(dayOfWeek.substring(0,1).toUpperCase() + dayOfWeek.substring(1) + ",\n"  + diaActual + "/" + mesActual);
         } catch (ParseException e) {
             pronosticoParaMostrar.setNombreDia("ErrorParseo");
         }
@@ -262,6 +263,8 @@ public class MainActivity extends AppCompatActivity {
         String url = getString(R.string.url) + "?id=" + idCiudadActual + "&units=metric&APPID=" + appid;
 
         requestSender.doGet_expectSingleObject(pronosticoslistener, url);
+
+        getSupportActionBar().setTitle(nombreCiudadActual);
 
         //TODO Lautaro: pase la siguiente instruccion al listener porque no funcionaba siempre
         //pronosticoAdapter.notifyDataSetChanged();
