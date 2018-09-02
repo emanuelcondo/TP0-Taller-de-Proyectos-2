@@ -58,54 +58,17 @@ public class MainActivity extends AppCompatActivity {
         pronosticosCacheados = new SparseArray<>();
         pronosticoDelDiaAdapter = new PronosticoDelDiaAdapter(this, pronosticosParaMostrar);
         recyclerView.setAdapter(pronosticoDelDiaAdapter);
-        //mockearPronosticos();
-
-
 
         pronosticoslistener = new PronosticosListener(this, pronosticoDelDiaAdapter);
         pronosticoslistener.setPronosticos(pronosticos);
         pronosticoslistener.setPronosticosDelDia(pronosticosParaMostrar);
         refrescarCiudadActual();
 
-        try {
-            mostrarPronosticos();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        mostrarPronosticos();
+
     }
 
-    //TODO: Borrar esto
-    private void mockearPronosticos() {
-//        String[] dias = {"2018-09-02 00:00:00", "2018-09-02 03:00:00", "2018-09-02 06:00:00", "2018-09-02 09:00:00", "2018-09-02 12:00:00"};
-//        Integer[] tempMaximas = {15, 22, 25, 11, 8};
-//        Integer[] tempMinimas = {11, 16, 18, 5, 1};
-//        TypedArray imagenesClima = getResources().obtainTypedArray(R.array.imagenes_clima);
-
-        pronosticos.clear(); //ojo no hacer new aca ni en el definitivo
-
-        for (int i = 2 ; i < 8 ; ++i) {
-            for (int j = 0; j < 24; j += 3) {
-
-                generarPronosticoRandom(String.format("%02d", j), String.format("%02d", i));
-            }
-        }
-
-//        imagenesClima.recycle();
-
-        pronosticoDelDiaAdapter.notifyDataSetChanged();
-    }
-
-    private void generarPronosticoRandom(String hora, String dia) {
-        Random r = new Random();
-        double randomMin;
-        double randomMax;
-        randomMin = 0.1 + (15.3 - 0.1) * r.nextDouble();
-        randomMax = 15.4 + (38.7 - 15.4) * r.nextDouble();
-
-        pronosticos.add(new Pronostico("2018-09-"+dia+" " +hora+":00:00", randomMin, randomMax, 800));
-    }
-
-    private void mostrarPronosticos() throws ParseException {
+    private void mostrarPronosticos() {
         PronosticoDelDia pronosticoParaMostrar = new PronosticoDelDia();
         int diaActual = -1;
         int mesActual = -1;
@@ -117,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
         int contadorParaPromediosDia = 0;
         int contadorParaPromediosNoche = 0;
         int contadorParaDiasDePronostico = 0;
+        Date date;
         String[] nombresDePronosticos = {"Hoy", "Mañana"};
         for (Pronostico pronostico: pronosticos) {
             int dia = pronostico.getDay();
@@ -127,9 +91,13 @@ public class MainActivity extends AppCompatActivity {
                         pronosticoParaMostrar.setNombreDia(nombresDePronosticos[contadorParaDiasDePronostico]);
                     else {
                         String dateString = String.format(Locale.getDefault(), "%d-%d-%d", anioActual, mesActual, diaActual);
-                        Date date = new SimpleDateFormat("yyyy-M-d").parse(dateString);
-                        String dayOfWeek = new SimpleDateFormat("EEEE", Locale.getDefault()).format(date);
-                        pronosticoParaMostrar.setNombreDia(dayOfWeek.substring(0,1).toUpperCase() + dayOfWeek.substring(1));
+                        try {
+                            date = new SimpleDateFormat("yyyy-M-d").parse(dateString);//ParseException
+                            String dayOfWeek = new SimpleDateFormat("EEEE", Locale.getDefault()).format(date);
+                            pronosticoParaMostrar.setNombreDia(dayOfWeek.substring(0,1).toUpperCase() + dayOfWeek.substring(1));
+                        } catch (ParseException e) {
+                            pronosticoParaMostrar.setNombreDia("ErrorParseo");
+                        }
                     }
                     if (contadorParaPromediosDia == 0) {
                         pronosticoParaMostrar.setHayDataDelDia(false);
@@ -161,10 +129,22 @@ public class MainActivity extends AppCompatActivity {
                 ++contadorParaPromediosNoche;
             }
         }
+        String dateString = String.format(Locale.getDefault(), "%d-%d-%d", anioActual, mesActual, diaActual);
+        try {
+            date = new SimpleDateFormat("yyyy-M-d").parse(dateString);//ParseException
+            String dayOfWeek = new SimpleDateFormat("EEEE", Locale.getDefault()).format(date);
+            pronosticoParaMostrar.setNombreDia(dayOfWeek.substring(0,1).toUpperCase() + dayOfWeek.substring(1));
+        } catch (ParseException e) {
+            pronosticoParaMostrar.setNombreDia("ErrorParseo");
+        }
+        pronosticoParaMostrar.setTemperaturaDia(temperaturaDia / contadorParaPromediosDia);
+        pronosticoParaMostrar.setTemperaturaNoche(temperaturaNoche / contadorParaPromediosNoche);
+        pronosticoParaMostrar.setImagenDia(imagenDia);
+        pronosticoParaMostrar.setImagenNoche(imagenNoche);
+        pronosticosParaMostrar.add(pronosticoParaMostrar);
     }
 
     public void refreshPronostico(View view) {
-//        mockearPronosticos();
         goToCities();
 
         //TODO: el siguiente metodo es el que posta hay que ejecutar acá: descomentar

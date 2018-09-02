@@ -172,5 +172,18 @@ public class PronosticosListener implements ResponseListener {
                 ++contadorParaPromediosNoche;
             }
         }
+        String dateString = String.format(Locale.getDefault(), "%d-%d-%d", anioActual, mesActual, diaActual);
+        try {
+            date = new SimpleDateFormat("yyyy-M-d").parse(dateString);//ParseException
+            String dayOfWeek = new SimpleDateFormat("EEEE", Locale.getDefault()).format(date);
+            pronosticoParaMostrar.setNombreDia(dayOfWeek.substring(0,1).toUpperCase() + dayOfWeek.substring(1));
+        } catch (ParseException e) {
+            pronosticoParaMostrar.setNombreDia("ErrorParseo");
+        }
+        pronosticoParaMostrar.setTemperaturaDia(temperaturaDia / contadorParaPromediosDia);
+        pronosticoParaMostrar.setTemperaturaNoche(temperaturaNoche / contadorParaPromediosNoche);
+        pronosticoParaMostrar.setImagenDia(imagenDia);
+        pronosticoParaMostrar.setImagenNoche(imagenNoche);
+        pronosticosDelDia.add(pronosticoParaMostrar);
     }
 }
