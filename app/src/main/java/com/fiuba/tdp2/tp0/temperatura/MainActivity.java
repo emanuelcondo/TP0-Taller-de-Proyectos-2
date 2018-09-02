@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(nombreCiudadActual);
 
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -261,6 +262,8 @@ public class MainActivity extends AppCompatActivity {
         String url = getString(R.string.url) + "?id=" + idCiudadActual + "&units=metric&APPID=" + appid;
 
         requestSender.doGet_expectSingleObject(pronosticoslistener, url);
+
+        getSupportActionBar().setTitle(nombreCiudadActual);
 
         //TODO Lautaro: pase la siguiente instruccion al listener porque no funcionaba siempre
         //pronosticoAdapter.notifyDataSetChanged();
