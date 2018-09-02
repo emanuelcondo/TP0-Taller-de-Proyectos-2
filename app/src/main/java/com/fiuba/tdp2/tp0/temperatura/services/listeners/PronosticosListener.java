@@ -31,7 +31,7 @@ public class PronosticosListener implements ResponseListener {
     @Override
     public void onRequestCompleted(Object response) {
 
-        Log.d("ActividadesListener", response.toString());
+        Log.d("PronosticosListener", response.toString());
         /*
         JSONArray array = (JSONArray)response;
 
@@ -61,14 +61,8 @@ public class PronosticosListener implements ResponseListener {
             for (int i = 0; i < allForecasts.length(); i++) {
                 jsonObject = allForecasts.getJSONObject(i);
                 Log.d("PronosticoListener", "Item: " + jsonObject.getString("dt_txt"));
-//                Pronostico pronostico = PronosticoFactory.fromJSONObject(allForecasts.getJSONObject(i));
-//                getPronosticos().add(pronostico);
-//                Beneficio beneficio = new Beneficio();
-//                JSONObject jo = benef.getJSONObject(i);
-//                beneficio.setDescripcion(jo.getString("descripcion"));
-//                beneficio.setDescuento(jo.getDouble("descuento"));
-//                beneficio.setPrecio(jo.getDouble("precio"));
-//                pronostico.addBeneficio(beneficio);
+                Pronostico pronostico = PronosticoFactory.fromJSONObject(jsonObject);
+                getPronosticos().add(pronostico);
             }
 
             Log.d("PronosticoListener", "Resultado: " + ((JSONObject)response).getString("cod"));
