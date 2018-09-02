@@ -109,6 +109,8 @@ public class MainActivity extends AppCompatActivity {
         int anioActual = -1;
         double temperaturaDia = 0;
         double temperaturaNoche = 0;
+        int imagenDia = 0;
+        int imagenNoche = 0;
         int contadorParaPromediosDia = 0;
         int contadorParaPromediosNoche = 0;
         int contadorParaDiasDePronostico = 0;
@@ -121,16 +123,19 @@ public class MainActivity extends AppCompatActivity {
                     if (contadorParaDiasDePronostico == 0 || contadorParaDiasDePronostico == 1)
                         pronosticoParaMostrar.setNombreDia(nombresDePronosticos[contadorParaDiasDePronostico]);
                     else {
-                        // First convert to Date. This is one of the many ways.
                         String dateString = String.format(Locale.getDefault(), "%d-%d-%d", anioActual, mesActual, diaActual);
                         Date date = new SimpleDateFormat("yyyy-M-d").parse(dateString);
                         String dayOfWeek = new SimpleDateFormat("EEEE", Locale.getDefault()).format(date);
                         pronosticoParaMostrar.setNombreDia(dayOfWeek.substring(0,1).toUpperCase() + dayOfWeek.substring(1));
                     }
-                    pronosticoParaMostrar.setTemperaturaDia(temperaturaDia / contadorParaPromediosDia);
+                    if (contadorParaPromediosDia == 0) {
+                        pronosticoParaMostrar.setHayDataDelDia(false);
+                    } else {
+                        pronosticoParaMostrar.setTemperaturaDia(temperaturaDia / contadorParaPromediosDia);
+                    }
                     pronosticoParaMostrar.setTemperaturaNoche(temperaturaNoche / contadorParaPromediosNoche);
-                    pronosticoParaMostrar.setImagenDia(pronostico.getImagen());
-                    pronosticoParaMostrar.setImagenNoche(pronostico.getImagen());
+                    pronosticoParaMostrar.setImagenDia(imagenDia);
+                    pronosticoParaMostrar.setImagenNoche(imagenNoche);
                     pronosticosParaMostrar.add(pronosticoParaMostrar);
                     temperaturaDia = 0;
                     temperaturaNoche = 0;
@@ -145,9 +150,11 @@ public class MainActivity extends AppCompatActivity {
             }
             if ( hora >= 6 && hora < 20 ) {
                 temperaturaDia += (pronostico.getTemperaturaMaxima() + pronostico.getTemperaturaMinima()) / 2;
+                imagenDia = pronostico.getImagen();
                 ++contadorParaPromediosDia;
             } else {
                 temperaturaNoche += (pronostico.getTemperaturaMaxima() + pronostico.getTemperaturaMinima()) / 2;
+                imagenNoche = pronostico.getImagen();
                 ++contadorParaPromediosNoche;
             }
         }
