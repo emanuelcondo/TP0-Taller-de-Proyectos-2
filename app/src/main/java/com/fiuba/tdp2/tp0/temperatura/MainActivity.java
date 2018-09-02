@@ -1,7 +1,6 @@
 package com.fiuba.tdp2.tp0.temperatura;
 
 import android.content.Intent;
-import android.content.res.TypedArray;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -53,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(pronosticoAdapter);
         //mockearPronosticos();
 
-        pronosticoslistener = new PronosticosListener(this);
+        pronosticoslistener = new PronosticosListener(this, pronosticoAdapter);
         pronosticoslistener.setPronosticos(pronosticos);
         refrescarCiudadActual();
     }
@@ -158,7 +157,8 @@ public class MainActivity extends AppCompatActivity {
 
         requestSender.doGet_expectSingleObject(pronosticoslistener, url);
 
-        pronosticoAdapter.notifyDataSetChanged();
+        //TODO Lautaro: pase la siguiente instruccion al listener porque no funcionaba siempre
+        //pronosticoAdapter.notifyDataSetChanged();
     }
 
 }

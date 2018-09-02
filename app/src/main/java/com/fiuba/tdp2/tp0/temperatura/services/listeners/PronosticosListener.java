@@ -8,6 +8,7 @@ package com.fiuba.tdp2.tp0.temperatura.services.listeners;
         import com.fiuba.tdp2.tp0.temperatura.dominio.Pronostico;
         import com.fiuba.tdp2.tp0.temperatura.dominio.PronosticoFactory;
         import com.fiuba.tdp2.tp0.temperatura.services.web.ResponseListener;
+        import com.fiuba.tdp2.tp0.temperatura.vista.PronosticoAdapter;
 
         import org.json.JSONArray;
         import org.json.JSONException;
@@ -24,9 +25,12 @@ public class PronosticosListener implements ResponseListener {
     private Context context;
 
     private List<Pronostico> pronosticos;
+    private List<Pronostico> pronosticosPrevios;
+    private PronosticoAdapter pronosticoAdapter;
 
-    public PronosticosListener(Context context) {
+    public PronosticosListener(Context context, PronosticoAdapter pronosticoAdapter) {
         this.context = context;
+        this.pronosticoAdapter = pronosticoAdapter;
     }
     @Override
     public void onRequestCompleted(Object response) {
@@ -54,6 +58,8 @@ public class PronosticosListener implements ResponseListener {
         */
         //Toast.makeText(context, response.toString(), Toast.LENGTH_LONG).show();
 
+        pronosticosPrevios = getPronosticos();
+        getPronosticos().clear();
         try {
             JSONObject jsonObject;
             JSONArray allForecasts = ((JSONObject)response).getJSONArray("list");
@@ -66,6 +72,8 @@ public class PronosticosListener implements ResponseListener {
             }
 
             Log.d("PronosticoListener", "Resultado: " + ((JSONObject)response).getString("cod"));
+            pronosticoAdapter.notifyDataSetChanged();
+
 
         } catch (JSONException e) {
             Log.e("PronosticoListener", e.getMessage());
@@ -75,6 +83,7 @@ public class PronosticosListener implements ResponseListener {
 
     @Override
     public void onRequestError(int codError, String errorMessage) {
+        setPronosticos(pronosticosPrevios);
         String error = codError + ": " + errorMessage;
         Log.d("PronosticoListener", error);
         Toast.makeText(context, error, Toast.LENGTH_LONG).show();
