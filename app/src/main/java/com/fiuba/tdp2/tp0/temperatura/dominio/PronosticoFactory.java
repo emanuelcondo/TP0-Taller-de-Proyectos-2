@@ -43,13 +43,14 @@ public  class PronosticoFactory {
             }
             infoDia.add(medicion);
         }
-        pronostico.add(new PronosticoDelDia(infoDia));
+        if (pronostico.size() < 5) pronostico.add(new PronosticoDelDia(infoDia));
         return pronostico;
     }
 
     /**
      * Dado un JSON con los proximos 5 dias, y el pronostico actual
      * calcula y devuelve los objetos PronosticoDelDia adecuados
+     * Este método modifica el pronostico5DiasJSON recibido y le agrega un elemento
      */
     public static Vector<PronosticoDelDia> deJSON(JSONObject pronostico5DiasJSON, JSONObject pronositcoActual) throws JSONException {
         JSONArray lista = pronostico5DiasJSON.getJSONArray("list");
