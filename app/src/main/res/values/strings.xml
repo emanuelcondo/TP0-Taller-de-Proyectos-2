@@ -6,6 +6,23 @@
     <string name="appid">13d33da11295c179f0b705613b2d6f18</string>
 
     <array name="imagenes_clima">
-        <item>@drawable/lluvia</item>
+        <item>@drawable/ic_01d</item>
+        <item>@drawable/ic_01n</item>
+        <item>@drawable/ic_02d</item>
+        <item>@drawable/ic_02n</item>
+        <item>@drawable/ic_03d</item>
+        <item>@drawable/ic_03n</item>
+        <item>@drawable/ic_04d</item>
+        <item>@drawable/ic_04n</item>
+        <item>@drawable/ic_09d</item>
+        <item>@drawable/ic_09n</item>
+        <item>@drawable/ic_10d</item>
+        <item>@drawable/ic_10n</item>
+        <item>@drawable/ic_11d</item>
+        <item>@drawable/ic_11n</item>
+        <item>@drawable/ic_13d</item>
+        <item>@drawable/ic_13n</item>
+        <item>@drawable/ic_50d</item>
+        <item>@drawable/ic_50n</item>
     </array>
 </resources>
