@@ -70,7 +70,10 @@ public class PronosticoDelDiaAdapter extends RecyclerView.Adapter<PronosticoDelD
         void bindTo(PronosticoDelDia pronostico){
             diaText.setText(pronostico.getNombreDia());
 
-            tempDiaText.setText(String.format(Locale.getDefault(), "%2.1f" , pronostico.getTemperaturaDia()).concat("º"));
+            if (pronostico.hayDataDelDia())
+                tempDiaText.setText(String.format(Locale.getDefault(), "%2.1f" , pronostico.getTemperaturaDia()).concat("º"));
+            else
+                tempDiaText.setText("N/A");
             tempNocheText.setText(String.format(Locale.getDefault(), "%2.1f" , pronostico.getTemperaturaNoche()).concat("º"));
         }
     }

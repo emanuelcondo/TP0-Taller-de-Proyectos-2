@@ -21,6 +21,7 @@ public class PronosticoDelDia {
     private int imagenNoche;
     private double temperaturaDia;
     private double temperaturaNoche;
+    private boolean hayDataDelDia = true;
     //public boolean faltaInfoDia = false;
 
     public PronosticoDelDia() {
@@ -107,6 +108,14 @@ public class PronosticoDelDia {
 
     public void setTemperaturaNoche(double temperaturaNoche) {
         this.temperaturaNoche = temperaturaNoche;
+    }
+
+    public boolean hayDataDelDia() {
+        return this.hayDataDelDia;
+    }
+
+    public void setHayDataDelDia(boolean hayDataDelDia) {
+        this.hayDataDelDia = hayDataDelDia;
     }
 
 
