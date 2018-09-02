@@ -51,10 +51,11 @@ public class MainActivity extends AppCompatActivity {
         pronosticosCacheados = new SparseArray<>();
         pronosticoAdapter = new PronosticoAdapter(this, pronosticos);
         recyclerView.setAdapter(pronosticoAdapter);
-        mockearPronosticos();
+        //mockearPronosticos();
 
         pronosticoslistener = new PronosticosListener(this);
         pronosticoslistener.setPronosticos(pronosticos);
+        refrescarCiudadActual();
     }
 
     //TODO: Borrar esto
@@ -139,12 +140,13 @@ public class MainActivity extends AppCompatActivity {
         //pronosticos = pronosticosCacheados.get(idCiudad);
         //if (pronosticos == null) {
            idCiudadActual = idCiudad;
-           //TODO: peggarle el nombre de la ciudad actual
+           //TODO: pegarle el nombre de la ciudad actual con la clase estática de Cities
            nombreCiudadActual = "CiudadHarcoded";
            refrescarCiudadActual();
 
             // pronosticosCacheados.put(idCiudad, pronosticos);
         //}
+
 
     }
 
@@ -155,6 +157,8 @@ public class MainActivity extends AppCompatActivity {
         String url = getString(R.string.url) + "?id=" + idCiudadActual + "&units=metric&APPID=" + appid;
 
         requestSender.doGet_expectSingleObject(pronosticoslistener, url);
+
+        pronosticoAdapter.notifyDataSetChanged();
     }
 
 }
