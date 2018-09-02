@@ -91,6 +91,9 @@ public class MainActivity extends AppCompatActivity {
     public void refreshPronostico(View view) {
 //        mockearPronosticos();
         goToCities();
+
+        //TODO: el siguiente metodo es el que posta hay que ejecutar acá: descomentar
+        //refrescarCiudadActual();
     }
 
 
