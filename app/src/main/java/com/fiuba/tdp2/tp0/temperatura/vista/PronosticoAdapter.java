@@ -58,9 +58,10 @@ public class PronosticoAdapter extends RecyclerView.Adapter<PronosticoAdapter.Vi
         }
 
         void bindTo(Pronostico pronostico){
-            diaText.setText(pronostico.getDia());
-            tempMaxText.setText(Integer.toString(pronostico.getTemperaturaMaxima()).concat("º"));
-            tempMinText.setText(Integer.toString(pronostico.getTemperaturaMinima()).concat("º"));
+            diaText.setText(pronostico.getDiaHora().substring(1, 5));
+
+            tempMaxText.setText(String.format("%2.1f" , pronostico.getTemperaturaMaxima()).concat("º"));
+            tempMinText.setText(String.format("%2.1f" , pronostico.getTemperaturaMinima()).concat("º"));
         }
     }
 

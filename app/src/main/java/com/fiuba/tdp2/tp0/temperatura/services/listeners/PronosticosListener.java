@@ -55,27 +55,23 @@ public class PronosticosListener implements ResponseListener {
         //Toast.makeText(context, response.toString(), Toast.LENGTH_LONG).show();
 
         try {
-            JSONObject jsonObject = (JSONObject)response;
-//            JSONArray allForecasts = jsonObject.getJSONArray("list");
+            JSONObject jsonObject;
+            JSONArray allForecasts = ((JSONObject)response).getJSONArray("list");
 
-            /*for (int i = 0; i < allForecasts.length(); i++) {
-                Pronostico pronostico = PronosticoFactory.fromJSONObject(allForecasts.getJSONObject(i));
-                getPronosticos().add(pronostico);
+            for (int i = 0; i < allForecasts.length(); i++) {
+                jsonObject = allForecasts.getJSONObject(i);
+                Log.d("PronosticoListener", "Item: " + jsonObject.getString("dt_txt"));
+//                Pronostico pronostico = PronosticoFactory.fromJSONObject(allForecasts.getJSONObject(i));
+//                getPronosticos().add(pronostico);
 //                Beneficio beneficio = new Beneficio();
 //                JSONObject jo = benef.getJSONObject(i);
 //                beneficio.setDescripcion(jo.getString("descripcion"));
 //                beneficio.setDescuento(jo.getDouble("descuento"));
 //                beneficio.setPrecio(jo.getDouble("precio"));
 //                pronostico.addBeneficio(beneficio);
-            }*/
-            Log.d("PronosticoListener", "Sarasa");
+            }
 
-
-
-            Log.d("PronosticoListener", "Resultado: " + jsonObject.getString("cod"));
-
-            Log.d("PronosticoListener", "Posterior");
-
+            Log.d("PronosticoListener", "Resultado: " + ((JSONObject)response).getString("cod"));
 
         } catch (JSONException e) {
             Log.e("PronosticoListener", e.getMessage());

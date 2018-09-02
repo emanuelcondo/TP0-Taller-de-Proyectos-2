@@ -18,6 +18,7 @@ import com.fiuba.tdp2.tp0.temperatura.services.web.RequestSender;
 import com.fiuba.tdp2.tp0.temperatura.vista.PronosticoAdapter;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -54,20 +55,33 @@ public class MainActivity extends AppCompatActivity {
 
     //TODO: Borrar esto
     private void mockearPronosticos() {
-        String[] dias = {"Lunes", "Martes", "Miércoles", "Jueves", "Viernes"};
-        Integer[] tempMaximas = {15, 22, 25, 11, 8};
-        Integer[] tempMinimas = {11, 16, 18, 5, 1};
-        TypedArray imagenesClima = getResources().obtainTypedArray(R.array.imagenes_clima);
+//        String[] dias = {"2018-09-02 00:00:00", "2018-09-02 03:00:00", "2018-09-02 06:00:00", "2018-09-02 09:00:00", "2018-09-02 12:00:00"};
+//        Integer[] tempMaximas = {15, 22, 25, 11, 8};
+//        Integer[] tempMinimas = {11, 16, 18, 5, 1};
+//        TypedArray imagenesClima = getResources().obtainTypedArray(R.array.imagenes_clima);
 
         pronosticos.clear(); //ojo no hacer new aca ni en el definitivo
 
-        for (int i = 0 ; i < dias.length ; ++i) {
-            pronosticos.add(new Pronostico(dias[i], tempMaximas[i], tempMinimas[i], imagenesClima.getResourceId(0, 0)));
+        for (int i = 2 ; i < 8 ; ++i) {
+            for (int j = 0; j < 24; j += 3) {
+
+                generarPronosticoRandom(String.format("%02d", j), String.format("%02d", i));
+            }
         }
 
-        imagenesClima.recycle();
+//        imagenesClima.recycle();
 
         pronosticoAdapter.notifyDataSetChanged();
+    }
+
+    private void generarPronosticoRandom(String hora, String dia) {
+        Random r = new Random();
+        double randomMin;
+        double randomMax;
+        randomMin = 0.1 + (15.3 - 0.1) * r.nextDouble();
+        randomMax = 15.4 + (38.7 - 15.4) * r.nextDouble();
+
+        pronosticos.add(new Pronostico("2018-09-"+dia+" " +hora+":00:00", randomMin, randomMax, 800));
     }
 
     public void refreshPronostico(View view) {
