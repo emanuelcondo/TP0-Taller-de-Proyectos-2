@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
                         try {
                             date = new SimpleDateFormat("yyyy-M-d").parse(dateString);//ParseException
                             String dayOfWeek = new SimpleDateFormat("EEEE", Locale.getDefault()).format(date);
-                            pronosticoParaMostrar.setNombreDia(dayOfWeek.substring(0,1).toUpperCase() + dayOfWeek.substring(1));
+                            pronosticoParaMostrar.setNombreDia(dayOfWeek.substring(0,1).toUpperCase() + dayOfWeek.substring(1) + ",\n"  + diaActual + "/" + mesActual);
                         } catch (ParseException e) {
                             pronosticoParaMostrar.setNombreDia("ErrorParseo");
                         }
@@ -133,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
         try {
             date = new SimpleDateFormat("yyyy-M-d").parse(dateString);//ParseException
             String dayOfWeek = new SimpleDateFormat("EEEE", Locale.getDefault()).format(date);
-            pronosticoParaMostrar.setNombreDia(dayOfWeek.substring(0,1).toUpperCase() + dayOfWeek.substring(1));
+            pronosticoParaMostrar.setNombreDia(dayOfWeek.substring(0,1).toUpperCase() + dayOfWeek.substring(1) + ",\n"  + diaActual + "/" + mesActual);
         } catch (ParseException e) {
             pronosticoParaMostrar.setNombreDia("ErrorParseo");
         }

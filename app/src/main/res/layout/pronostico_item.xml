@@ -10,11 +10,12 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:layout_width="70dp"
+            android:layout_width="85dp"
             android:layout_height="wrap_content"
             android:id="@+id/dia"
             android:padding="8dp"
-            style="@style/TextAppearance.AppCompat.Medium" />
+            android:layout_centerVertical="true"
+            android:textColor="#000000"/>
 
         <ImageView
             android:layout_width="60dp"
@@ -31,6 +32,7 @@
             android:id="@+id/tempDia"
             android:padding="8dp"
             style="@style/TextAppearance.AppCompat.Subhead"
+            android:layout_centerVertical="true"
             android:layout_toRightOf="@id/imagenDia"
             android:layout_toEndOf="@+id/imagenDia" />
 
@@ -49,6 +51,7 @@
             android:id="@+id/tempNoche"
             android:padding="8dp"
             style="@style/TextAppearance.AppCompat.Subhead"
+            android:layout_centerVertical="true"
             android:layout_toRightOf="@id/imagenNoche"
             android:layout_toEndOf="@id/imagenNoche" />
 
