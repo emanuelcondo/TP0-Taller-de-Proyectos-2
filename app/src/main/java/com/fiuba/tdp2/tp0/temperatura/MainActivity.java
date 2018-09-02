@@ -187,6 +187,56 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("MainActivity", "Clic en ciudad harcodeada");
                 mostrarCiudad(3436230); //Avellaneda harcodeada
                 break;
+            case R.id.harcodeada02:
+                Log.d("MainActivity", "Clic en ciudad harcodeada");
+                nombreCiudadActual = getResources().getString(R.string.ciudad_harcodeada02);
+                mostrarCiudad(3429886);
+                break;
+            case R.id.harcodeada03:
+                Log.d("MainActivity", "Clic en ciudad harcodeada");
+                nombreCiudadActual = getResources().getString(R.string.ciudad_harcodeada03);
+                mostrarCiudad(6359299);
+                break;
+            case R.id.harcodeada04:
+                Log.d("MainActivity", "Clic en ciudad harcodeada");
+                nombreCiudadActual = getResources().getString(R.string.ciudad_harcodeada04);
+                mostrarCiudad(5128638);
+                break;
+            case R.id.harcodeada05:
+                Log.d("MainActivity", "Clic en ciudad harcodeada");
+                nombreCiudadActual = getResources().getString(R.string.ciudad_harcodeada05);
+                mostrarCiudad(6453366);
+                break;
+            case R.id.harcodeada06:
+                Log.d("MainActivity", "Clic en ciudad harcodeada");
+                nombreCiudadActual = getResources().getString(R.string.ciudad_harcodeada06);
+                mostrarCiudad(1853909);
+                break;
+            case R.id.harcodeada07:
+                Log.d("MainActivity", "Clic en ciudad harcodeada");
+                nombreCiudadActual = getResources().getString(R.string.ciudad_harcodeada07);
+                mostrarCiudad(524901);
+                break;
+            case R.id.harcodeada08:
+                Log.d("MainActivity", "Clic en ciudad harcodeada");
+                nombreCiudadActual = getResources().getString(R.string.ciudad_harcodeada08);
+                mostrarCiudad(3858677);
+                break;
+            case R.id.harcodeada09:
+                Log.d("MainActivity", "Clic en ciudad harcodeada");
+                nombreCiudadActual = getResources().getString(R.string.ciudad_harcodeada09);
+                mostrarCiudad(3840092);
+                break;
+            case R.id.harcodeada10:
+                Log.d("MainActivity", "Clic en ciudad harcodeada");
+                nombreCiudadActual = getResources().getString(R.string.ciudad_harcodeada10);
+                mostrarCiudad(3652462);
+                break;
+            case R.id.harcodeada11:
+                Log.d("MainActivity", "Clic en ciudad harcodeada");
+                nombreCiudadActual = getResources().getString(R.string.ciudad_harcodeada11);
+                mostrarCiudad(1210997);
+                break;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -205,7 +255,7 @@ public class MainActivity extends AppCompatActivity {
         //if (pronosticos == null) {
            idCiudadActual = idCiudad;
            //TODO: pegarle el nombre de la ciudad actual con la clase estática de Cities
-           nombreCiudadActual = "CiudadHarcoded";
+
            refrescarCiudadActual();
 
             // pronosticosCacheados.put(idCiudad, pronosticos);
