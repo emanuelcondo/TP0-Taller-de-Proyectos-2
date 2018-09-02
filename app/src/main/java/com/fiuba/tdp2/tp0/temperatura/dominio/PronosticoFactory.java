@@ -1,13 +1,16 @@
 package com.fiuba.tdp2.tp0.temperatura.dominio;
 
-
-
 import android.util.Log;
 
 import com.fiuba.tdp2.tp0.temperatura.R;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.Calendar;
+import java.util.Vector;
+import java.util.Date;
 
 //import java.util.HashSet;
 //import java.util.Set;
@@ -15,6 +18,44 @@ import org.json.JSONObject;
 
 
 public  class PronosticoFactory {
+
+    /**
+     * Dado un JSON con los proximos 5 dias, calcula y devuelve los objetos PronosticoDelDia adecuados
+     */
+    public static Vector<PronosticoDelDia> deJSON(JSONObject pronostico5DiasJSON) throws JSONException {
+        int cantidad = pronostico5DiasJSON.getInt("cnt");
+        JSONArray lista = pronostico5DiasJSON.getJSONArray("list");
+        int diaActual = 0; // 1-31, 0 = Sin inicializar. Como solo predecimos 5 dias, no me preocupo.
+        Vector<JSONObject> infoDia = new Vector<JSONObject>();
+        Vector<PronosticoDelDia> pronostico = new Vector<PronosticoDelDia>();
+        for (int i = 0; i < cantidad; ++i) {
+            JSONObject medicion = lista.getJSONObject(i);
+            long timestampUnix = medicion.getLong("dt");
+            Calendar fecha = Calendar.getInstance();
+            fecha.setTimeInMillis(timestampUnix*1000);
+            int diaLeido = fecha.get(Calendar.DAY_OF_MONTH);
+            if (diaLeido != diaActual) {
+                if (!infoDia.isEmpty()) {
+                    pronostico.add(new PronosticoDelDia(infoDia));
+                }
+                infoDia.clear();
+                diaActual = diaLeido;
+            }
+            infoDia.add(medicion);
+        }
+        pronostico.add(new PronosticoDelDia(infoDia));
+        return pronostico;
+    }
+
+    /**
+     * Dado un JSON con los proximos 5 dias, y el pronostico actual
+     * calcula y devuelve los objetos PronosticoDelDia adecuados
+     */
+    public static Vector<PronosticoDelDia> deJSON(JSONObject pronostico5DiasJSON, JSONObject pronositcoActual) throws JSONException {
+        JSONArray lista = pronostico5DiasJSON.getJSONArray("list");
+        lista.put(0, pronositcoActual);
+        return deJSON(pronostico5DiasJSON);
+    }
 
     public static Pronostico fromJSONObject(JSONObject jsonObject) throws JSONException {
 
