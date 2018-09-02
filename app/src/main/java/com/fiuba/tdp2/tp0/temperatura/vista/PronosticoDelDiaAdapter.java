@@ -11,19 +11,24 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.fiuba.tdp2.tp0.temperatura.R;
+import com.fiuba.tdp2.tp0.temperatura.dominio.Pronostico;
 import com.fiuba.tdp2.tp0.temperatura.dominio.PronosticoDelDia;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Locale;
 
 public class PronosticoDelDiaAdapter extends RecyclerView.Adapter<PronosticoDelDiaAdapter.ViewHolder> {
 
-    private ArrayList<PronosticoDelDia> pronosticos;
+    private ArrayList<PronosticoDelDia> pronosticosDelDias;
+
     private Context contexto;
 
     public PronosticoDelDiaAdapter(Context contexto, ArrayList<PronosticoDelDia> pronosticos) {
         this.contexto = contexto;
-        this.pronosticos = pronosticos;
+        this.pronosticosDelDias = pronosticos;
     }
 
     @NonNull
@@ -32,7 +37,7 @@ public class PronosticoDelDiaAdapter extends RecyclerView.Adapter<PronosticoDelD
     }
 
     public void onBindViewHolder(@NonNull PronosticoDelDiaAdapter.ViewHolder holder, int posicion) {
-        PronosticoDelDia pronostico = pronosticos.get(posicion);
+        PronosticoDelDia pronostico = pronosticosDelDias.get(posicion);
         Glide
                 .with(contexto)
                 .load(pronostico.getImagenDia())
@@ -46,7 +51,7 @@ public class PronosticoDelDiaAdapter extends RecyclerView.Adapter<PronosticoDelD
 
     @Override
     public int getItemCount() {
-        return pronosticos.size();
+        return pronosticosDelDias.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
@@ -70,9 +75,16 @@ public class PronosticoDelDiaAdapter extends RecyclerView.Adapter<PronosticoDelD
         void bindTo(PronosticoDelDia pronostico){
             diaText.setText(pronostico.getNombreDia());
 
-            tempDiaText.setText(String.format(Locale.getDefault(), "%2.1f" , pronostico.getTemperaturaDia()).concat("º"));
+            if (pronostico.hayDataDelDia())
+                tempDiaText.setText(String.format(Locale.getDefault(), "%2.1f" , pronostico.getTemperaturaDia()).concat("º"));
+            else
+                tempDiaText.setText("N/A");
             tempNocheText.setText(String.format(Locale.getDefault(), "%2.1f" , pronostico.getTemperaturaNoche()).concat("º"));
         }
     }
+
+
+
+
 
 }

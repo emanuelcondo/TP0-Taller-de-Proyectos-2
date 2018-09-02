@@ -1,7 +1,18 @@
 <resources>
     <string name="app_name">Temperatura</string>
     <string name="action_settings">Ciudades</string>
-    <string name="ciudad_harcodeada"> - Avellaneda</string>
+    <string name="ciudad_harcodeada">Avellaneda</string>
+    <string name="ciudad_harcodeada02">Posadas</string>
+    <string name="ciudad_harcodeada03">Madrid</string>
+    <string name="ciudad_harcodeada04">Nueva York</string>
+    <string name="ciudad_harcodeada05">Oslo</string>
+    <string name="ciudad_harcodeada06">Osaka</string>
+    <string name="ciudad_harcodeada07">Moscú</string>
+    <string name="ciudad_harcodeada08">Calafate</string>
+    <string name="ciudad_harcodeada09">Puerto Madryn</string>
+    <string name="ciudad_harcodeada10">Quito</string>
+    <string name="ciudad_harcodeada11">Bangladesh</string>
+
     <string name="url">http://api.openweathermap.org/data/2.5/forecast</string>
     <string name="appid">13d33da11295c179f0b705613b2d6f18</string>
 
