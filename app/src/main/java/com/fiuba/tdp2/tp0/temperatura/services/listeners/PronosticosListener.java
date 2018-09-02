@@ -135,7 +135,7 @@ public class PronosticosListener implements ResponseListener {
                         String dateString = String.format(Locale.getDefault(), "%d-%d-%d", anioActual, mesActual, diaActual);
                         try {
                             date = new SimpleDateFormat("yyyy-M-d").parse(dateString);//ParseException
-                            String dayOfWeek = new SimpleDateFormat("EEEE", Locale.getDefault()).format(date);
+                            String dayOfWeek = new SimpleDateFormat("EEEE", new Locale("es")).format(date);
                             pronosticoParaMostrar.setNombreDia(dayOfWeek.substring(0,1).toUpperCase() + dayOfWeek.substring(1) + ",\n" + diaActual + "/" + mesActual);
                         } catch (ParseException e) {
                             pronosticoParaMostrar.setNombreDia("ErrorParseo");
@@ -175,7 +175,7 @@ public class PronosticosListener implements ResponseListener {
         String dateString = String.format(Locale.getDefault(), "%d-%d-%d", anioActual, mesActual, diaActual);
         try {
             date = new SimpleDateFormat("yyyy-M-d").parse(dateString);//ParseException
-            String dayOfWeek = new SimpleDateFormat("EEEE", Locale.getDefault()).format(date);
+            String dayOfWeek = new SimpleDateFormat("EEEE", new Locale("es")).format(date);
             pronosticoParaMostrar.setNombreDia(dayOfWeek.substring(0,1).toUpperCase() + dayOfWeek.substring(1) + ",\n"  + diaActual + "/" + mesActual);
         } catch (ParseException e) {
             pronosticoParaMostrar.setNombreDia("ErrorParseo");
