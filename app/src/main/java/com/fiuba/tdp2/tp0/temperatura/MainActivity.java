@@ -1,5 +1,6 @@
 package com.fiuba.tdp2.tp0.temperatura;
 
+import android.content.Intent;
 import android.content.res.TypedArray;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -77,7 +78,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void refreshPronostico(View view) {
-        mockearPronosticos();
+//        mockearPronosticos();
+        goToCities();
     }
 
 
@@ -109,9 +111,12 @@ public class MainActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
-
-
         return true;
+    }
+
+    public void goToCities() {
+        Intent intent = new Intent(MainActivity.this, CitiesActivity.class);
+        MainActivity.this.startActivity(intent);
     }
 
     private void mostrarCiudad(int idCiudad) {
