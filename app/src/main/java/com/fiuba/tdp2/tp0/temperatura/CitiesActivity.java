@@ -1,5 +1,6 @@
 package com.fiuba.tdp2.tp0.temperatura;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -8,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
 
 import com.fiuba.tdp2.tp0.temperatura.dominio.City;
@@ -36,6 +38,16 @@ public class CitiesActivity extends AppCompatActivity {
 
         toolbar = findViewById(R.id.citiestoolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                finish();
+            }
+        });
 
         cities = this.loadCities();
         citiesArrayAdapter = new CitiesAdapter(getApplicationContext(), cities);
