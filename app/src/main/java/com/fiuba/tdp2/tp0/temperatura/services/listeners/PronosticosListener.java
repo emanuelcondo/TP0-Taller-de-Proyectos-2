@@ -1,25 +1,28 @@
 package com.fiuba.tdp2.tp0.temperatura.services.listeners;
 
 
-        import android.content.Context;
-        import android.util.Log;
-        import android.widget.Toast;
+import android.content.Context;
+import android.util.Log;
+import android.widget.Toast;
 
-        import com.fiuba.tdp2.tp0.temperatura.dominio.Pronostico;
-        import com.fiuba.tdp2.tp0.temperatura.dominio.PronosticoDelDia;
-        import com.fiuba.tdp2.tp0.temperatura.dominio.PronosticoFactory;
-        import com.fiuba.tdp2.tp0.temperatura.services.web.ResponseListener;
-        import com.fiuba.tdp2.tp0.temperatura.vista.PronosticoDelDiaAdapter;
+import com.fiuba.tdp2.tp0.temperatura.dominio.Pronostico;
+import com.fiuba.tdp2.tp0.temperatura.dominio.PronosticoDelDia;
+import com.fiuba.tdp2.tp0.temperatura.dominio.PronosticoFactory;
+import com.fiuba.tdp2.tp0.temperatura.services.web.ResponseListener;
+import com.fiuba.tdp2.tp0.temperatura.vista.PronosticoDelDiaAdapter;
 
-        import org.json.JSONArray;
-        import org.json.JSONException;
-        import org.json.JSONObject;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-        import java.util.List;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 
-//        import ar.com.fiuba.tddp1.gestorvida.dominio.Actividad;
-//        import ar.com.fiuba.tddp1.gestorvida.dominio.ActividadFactory;
-//        import ar.com.fiuba.tddp1.gestorvida.dominio.Perfil;
+
 
 public class PronosticosListener implements ResponseListener {
 
@@ -27,6 +30,7 @@ public class PronosticosListener implements ResponseListener {
 
     private List<Pronostico> pronosticos;
     private List<Pronostico> pronosticosPrevios;
+    private List<PronosticoDelDia> pronosticosDelDia;
     private PronosticoDelDiaAdapter pronosticoAdapter;
 
     public PronosticosListener(Context context, PronosticoDelDiaAdapter pronosticoAdapter) {
@@ -73,6 +77,7 @@ public class PronosticosListener implements ResponseListener {
             }
 
             Log.d("PronosticoListener", "Resultado: " + ((JSONObject)response).getString("cod"));
+            mostrarPronosticos();
             pronosticoAdapter.notifyDataSetChanged();
 
 
@@ -97,5 +102,75 @@ public class PronosticosListener implements ResponseListener {
 
     public void setPronosticos(List<Pronostico> pronosticos) {
         this.pronosticos = pronosticos;
+    }
+
+    public void setPronosticosDelDia(List<PronosticoDelDia> pronosticosDelDia) {
+        this.pronosticosDelDia = pronosticosDelDia;
+    }
+
+    // TODO: cachear esta excepcion adentro y no hacer nada
+    private void mostrarPronosticos() {
+        PronosticoDelDia pronosticoParaMostrar = new PronosticoDelDia();
+        int diaActual = -1;
+        int mesActual = -1;
+        int anioActual = -1;
+        double temperaturaDia = 0;
+        double temperaturaNoche = 0;
+        int imagenDia = 0;
+        int imagenNoche = 0;
+        int contadorParaPromediosDia = 0;
+        int contadorParaPromediosNoche = 0;
+        int contadorParaDiasDePronostico = 0;
+        String[] nombresDePronosticos = {"Hoy", "Mañana"};
+        Date date;
+        pronosticosDelDia.clear();
+        for (Pronostico pronostico: pronosticos) {
+            int dia = pronostico.getDay();
+            int hora = pronostico.getHour();
+            if (dia != diaActual) {
+                if (contadorParaPromediosNoche != 0) {
+                    if (contadorParaDiasDePronostico == 0 || contadorParaDiasDePronostico == 1)
+                        pronosticoParaMostrar.setNombreDia(nombresDePronosticos[contadorParaDiasDePronostico]);
+                    else {
+                        String dateString = String.format(Locale.getDefault(), "%d-%d-%d", anioActual, mesActual, diaActual);
+                        try {
+                            date = new SimpleDateFormat("yyyy-M-d").parse(dateString);//ParseException
+                            String dayOfWeek = new SimpleDateFormat("EEEE", Locale.getDefault()).format(date);
+                            pronosticoParaMostrar.setNombreDia(dayOfWeek.substring(0,1).toUpperCase() + dayOfWeek.substring(1));
+                        } catch (ParseException e) {
+                            pronosticoParaMostrar.setNombreDia("ErrorParseo");
+                        }
+
+                    }
+                    if (contadorParaPromediosDia == 0) {
+                        pronosticoParaMostrar.setHayDataDelDia(false);
+                    } else {
+                        pronosticoParaMostrar.setTemperaturaDia(temperaturaDia / contadorParaPromediosDia);
+                    }
+                    pronosticoParaMostrar.setTemperaturaNoche(temperaturaNoche / contadorParaPromediosNoche);
+                    pronosticoParaMostrar.setImagenDia(imagenDia);
+                    pronosticoParaMostrar.setImagenNoche(imagenNoche);
+                    pronosticosDelDia.add(pronosticoParaMostrar);
+                    temperaturaDia = 0;
+                    temperaturaNoche = 0;
+                    contadorParaPromediosDia = 0;
+                    contadorParaPromediosNoche = 0;
+                    ++contadorParaDiasDePronostico;
+                }
+                pronosticoParaMostrar = new PronosticoDelDia();
+                diaActual = pronostico.getDay();
+                mesActual = pronostico.getMonth();
+                anioActual = pronostico.getYear();
+            }
+            if ( hora >= 6 && hora < 20 ) {
+                temperaturaDia += (pronostico.getTemperaturaMaxima() + pronostico.getTemperaturaMinima()) / 2;
+                imagenDia = pronostico.getImagen();
+                ++contadorParaPromediosDia;
+            } else {
+                temperaturaNoche += (pronostico.getTemperaturaMaxima() + pronostico.getTemperaturaMinima()) / 2;
+                imagenNoche = pronostico.getImagen();
+                ++contadorParaPromediosNoche;
+            }
+        }
     }
 }

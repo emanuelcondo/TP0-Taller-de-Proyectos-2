@@ -58,17 +58,20 @@ public class MainActivity extends AppCompatActivity {
         pronosticosCacheados = new SparseArray<>();
         pronosticoDelDiaAdapter = new PronosticoDelDiaAdapter(this, pronosticosParaMostrar);
         recyclerView.setAdapter(pronosticoDelDiaAdapter);
-        mockearPronosticos();
+        //mockearPronosticos();
+
+
+
+        pronosticoslistener = new PronosticosListener(this, pronosticoDelDiaAdapter);
+        pronosticoslistener.setPronosticos(pronosticos);
+        pronosticoslistener.setPronosticosDelDia(pronosticosParaMostrar);
+        refrescarCiudadActual();
 
         try {
             mostrarPronosticos();
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
-        pronosticoslistener = new PronosticosListener(this, pronosticoDelDiaAdapter);
-        pronosticoslistener.setPronosticos(pronosticos);
-        refrescarCiudadActual();
     }
 
     //TODO: Borrar esto
