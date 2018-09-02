@@ -35,6 +35,9 @@ public class MainActivity extends AppCompatActivity {
 
     private PronosticosListener pronosticoslistener;
 
+    private int idCiudadActual = 3435910; //por default se muestra buenos aires
+    private  String nombreCiudadActual = "Buenos Aires";
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -132,16 +135,23 @@ public class MainActivity extends AppCompatActivity {
         // primero veo si ya fue cacheado
         //pronosticos = pronosticosCacheados.get(idCiudad);
         //if (pronosticos == null) {
-            RequestSender requestSender = new RequestSender(this);
-            String appid = getResources().getString(R.string.appid);
-
-            String url = getString(R.string.url) + "?id=" + idCiudad + "&units=metric&APPID=" + appid;
-
-            requestSender.doGet_expectSingleObject(pronosticoslistener, url);
+           idCiudadActual = idCiudad;
+           //TODO: peggarle el nombre de la ciudad actual
+           nombreCiudadActual = "CiudadHarcoded";
+           refrescarCiudadActual();
 
             // pronosticosCacheados.put(idCiudad, pronosticos);
         //}
 
+    }
+
+    private void refrescarCiudadActual() {
+        RequestSender requestSender = new RequestSender(this);
+        String appid = getResources().getString(R.string.appid);
+
+        String url = getString(R.string.url) + "?id=" + idCiudadActual + "&units=metric&APPID=" + appid;
+
+        requestSender.doGet_expectSingleObject(pronosticoslistener, url);
     }
 
 }
