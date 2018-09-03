@@ -25,9 +25,11 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
+        app:fabSize="normal"
         android:layout_margin="16dp"
         app:backgroundTint="@color/colorPrimary"
         android:onClick="refreshPronostico"
-        app:srcCompat="@android:drawable/ic_menu_always_landscape_portrait" />
+        android:src="@drawable/ic_refresh"
+         />
 
 </RelativeLayout>
