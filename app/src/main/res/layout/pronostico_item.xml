@@ -9,6 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
+        android:baselineAligned="false"
         android:weightSum="3">
 
         <RelativeLayout
@@ -31,31 +32,22 @@
             android:layout_height="wrap_content"
             android:layout_weight="2" >
 
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:padding="4dp"
-                android:id="@+id/imagenDia"
-                android:contentDescription="@string/app_name" />
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/tempDia"
                 android:padding="8dp"
                 style="@style/TextAppearance.AppCompat.Subhead"
-                android:layout_centerVertical="true"
-                android:layout_toRightOf="@id/imagenDia"
-                android:layout_toEndOf="@+id/imagenDia" />
+                android:layout_centerVertical="true" />
 
             <ImageView
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:padding="4dp"
-                android:id="@+id/imagenNoche"
+                android:id="@+id/imagenDia"
                 android:contentDescription="@string/app_name"
                 android:layout_toRightOf="@id/tempDia"
-                android:layout_toEndOf="@+id/tempDia" />
+                android:layout_toEndOf="@+id/tempDia"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -64,8 +56,17 @@
                 android:padding="8dp"
                 style="@style/TextAppearance.AppCompat.Subhead"
                 android:layout_centerVertical="true"
-                android:layout_toRightOf="@id/imagenNoche"
-                android:layout_toEndOf="@id/imagenNoche" />
+                android:layout_toRightOf="@id/imagenDia"
+                android:layout_toEndOf="@id/imagenDia" />
+
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:padding="4dp"
+                android:id="@+id/imagenNoche"
+                android:contentDescription="@string/app_name"
+                android:layout_toRightOf="@id/tempNoche"
+                android:layout_toEndOf="@+id/tempNoche" />
 
         </RelativeLayout>
     </LinearLayout>
