@@ -245,9 +245,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void refrescarCiudadActual() {
         RequestSender requestSender = new RequestSender(this);
-        String appid = getResources().getString(R.string.appid);
-
-        String url = getString(R.string.url) + "?id=" + idCiudadActual + "&units=metric&APPID=" + appid;
+        String hostServer = getString(R.string.host);
+        String baseUrl = getString(R.string.base_url);
+        String url = hostServer+baseUrl+idCiudadActual;
 
         requestSender.doGet_expectSingleObject(pronosticoslistener, url);
 

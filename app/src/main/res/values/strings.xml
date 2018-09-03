@@ -5,8 +5,8 @@
     <string name="ciudad_harcodeada02">Ciudad Test Nubes</string>
     <string name="ciudad_harcodeada03">Ciudad Test Clima</string>
 
-    <string name="url">http://api.openweathermap.org/data/2.5/forecast</string>
-    <string name="appid">13d33da11295c179f0b705613b2d6f18</string>
+    <string name="host">http://localhost:3000</string>
+    <string name="base_url">api/weather/forecast/</string>
 
     <array name="imagenes_clima">
         <item>@drawable/ic_01d</item>
