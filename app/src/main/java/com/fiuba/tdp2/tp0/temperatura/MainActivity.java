@@ -3,8 +3,6 @@ package com.fiuba.tdp2.tp0.temperatura;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.PorterDuff;
-import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,7 +14,6 @@ import android.util.SparseArray;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.fiuba.tdp2.tp0.temperatura.dominio.Pronostico;
 import com.fiuba.tdp2.tp0.temperatura.dominio.PronosticoDelDia;
@@ -29,8 +26,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.Locale;
-import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -188,8 +185,6 @@ public class MainActivity extends AppCompatActivity {
         refrescarCiudadActual();
     }
 
-
-
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
@@ -212,58 +207,13 @@ public class MainActivity extends AppCompatActivity {
                 goToCities();
                 break;
             case R.id.harcodeada:
-                Log.d("MainActivity", "Clic en ciudad harcodeada");
-                mostrarCiudad(3436230); //Avellaneda harcodeada
+                resetTemperaturas();
                 break;
             case R.id.harcodeada02:
-                Log.d("MainActivity", "Clic en ciudad harcodeada");
-                nombreCiudadActual = getResources().getString(R.string.ciudad_harcodeada02);
-                mostrarCiudad(3429886);
+                setNubes();
                 break;
             case R.id.harcodeada03:
-                Log.d("MainActivity", "Clic en ciudad harcodeada");
-                nombreCiudadActual = getResources().getString(R.string.ciudad_harcodeada03);
-                mostrarCiudad(6359299);
-                break;
-            case R.id.harcodeada04:
-                Log.d("MainActivity", "Clic en ciudad harcodeada");
-                nombreCiudadActual = getResources().getString(R.string.ciudad_harcodeada04);
-                mostrarCiudad(5128638);
-                break;
-            case R.id.harcodeada05:
-                Log.d("MainActivity", "Clic en ciudad harcodeada");
-                nombreCiudadActual = getResources().getString(R.string.ciudad_harcodeada05);
-                mostrarCiudad(6453366);
-                break;
-            case R.id.harcodeada06:
-                Log.d("MainActivity", "Clic en ciudad harcodeada");
-                nombreCiudadActual = getResources().getString(R.string.ciudad_harcodeada06);
-                mostrarCiudad(1853909);
-                break;
-            case R.id.harcodeada07:
-                Log.d("MainActivity", "Clic en ciudad harcodeada");
-                nombreCiudadActual = getResources().getString(R.string.ciudad_harcodeada07);
-                mostrarCiudad(524901);
-                break;
-            case R.id.harcodeada08:
-                Log.d("MainActivity", "Clic en ciudad harcodeada");
-                nombreCiudadActual = getResources().getString(R.string.ciudad_harcodeada08);
-                mostrarCiudad(3858677);
-                break;
-            case R.id.harcodeada09:
-                Log.d("MainActivity", "Clic en ciudad harcodeada");
-                nombreCiudadActual = getResources().getString(R.string.ciudad_harcodeada09);
-                mostrarCiudad(3840092);
-                break;
-            case R.id.harcodeada10:
-                Log.d("MainActivity", "Clic en ciudad harcodeada");
-                nombreCiudadActual = getResources().getString(R.string.ciudad_harcodeada10);
-                mostrarCiudad(3652462);
-                break;
-            case R.id.harcodeada11:
-                Log.d("MainActivity", "Clic en ciudad harcodeada");
-                nombreCiudadActual = getResources().getString(R.string.ciudad_harcodeada11);
-                mostrarCiudad(1210997);
+                setCondClimaticas();
                 break;
             default:
                 return super.onOptionsItemSelected(item);
@@ -318,6 +268,52 @@ public class MainActivity extends AppCompatActivity {
             colorItem = getResources().getColor(R.color.colorItemNoche);
         }
         this.findViewById(R.id.relative).setBackgroundColor(colorFondo);
+    }
+
+    /**
+     * Pone todas las temperaturas a mostrar en 0
+     */
+    private void resetTemperaturas() {
+        for (Iterator<PronosticoDelDia> i = pronosticosParaMostrar.iterator(); i.hasNext();) {
+            PronosticoDelDia pronostico = i.next();
+            pronostico.setTemperaturaDia(0);
+            pronostico.setTemperaturaNoche(0);
+        }
+        this.pronosticoDelDiaAdapter.notifyDataSetChanged();
+    }
+
+    /**
+     * Cambia los iconos por los diferentes grados de nubes
+     */
+    private void setNubes() {
+        pronosticosParaMostrar.get(0).setImagenDia(800);
+        pronosticosParaMostrar.get(0).setImagenNoche(800);
+        pronosticosParaMostrar.get(1).setImagenDia(801);
+        pronosticosParaMostrar.get(1).setImagenNoche(801);
+        pronosticosParaMostrar.get(2).setImagenDia(802);
+        pronosticosParaMostrar.get(2).setImagenNoche(802);
+        pronosticosParaMostrar.get(3).setImagenDia(803);
+        pronosticosParaMostrar.get(3).setImagenNoche(803);
+        pronosticosParaMostrar.get(4).setImagenDia(803);
+        pronosticosParaMostrar.get(4).setImagenNoche(803);
+        this.pronosticoDelDiaAdapter.notifyDataSetChanged();
+    }
+
+    /**
+     * Cambia los iconos por soleado/lluvia/rayos/nieve/neblina
+     */
+    private void setCondClimaticas() {
+        pronosticosParaMostrar.get(0).setImagenDia(200);
+        pronosticosParaMostrar.get(0).setImagenNoche(200);
+        pronosticosParaMostrar.get(1).setImagenDia(300);
+        pronosticosParaMostrar.get(1).setImagenNoche(300);
+        pronosticosParaMostrar.get(2).setImagenDia(500);
+        pronosticosParaMostrar.get(2).setImagenNoche(500);
+        pronosticosParaMostrar.get(3).setImagenDia(600);
+        pronosticosParaMostrar.get(3).setImagenNoche(600);
+        pronosticosParaMostrar.get(4).setImagenDia(701);
+        pronosticosParaMostrar.get(4).setImagenNoche(701);
+        this.pronosticoDelDiaAdapter.notifyDataSetChanged();
     }
 
 }

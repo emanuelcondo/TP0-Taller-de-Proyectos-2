@@ -24,46 +24,6 @@
         android:orderInCategory="100"
         android:title="@string/ciudad_harcodeada03"
         app:showAsAction="never" />
-    <item
-        android:id="@+id/harcodeada04"
-        android:orderInCategory="100"
-        android:title="@string/ciudad_harcodeada04"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/harcodeada05"
-        android:orderInCategory="100"
-        android:title="@string/ciudad_harcodeada05"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/harcodeada06"
-        android:orderInCategory="100"
-        android:title="@string/ciudad_harcodeada06"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/harcodeada07"
-        android:orderInCategory="100"
-        android:title="@string/ciudad_harcodeada07"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/harcodeada08"
-        android:orderInCategory="100"
-        android:title="@string/ciudad_harcodeada08"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/harcodeada09"
-        android:orderInCategory="100"
-        android:title="@string/ciudad_harcodeada09"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/harcodeada10"
-        android:orderInCategory="100"
-        android:title="@string/ciudad_harcodeada10"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/harcodeada11"
-        android:orderInCategory="100"
-        android:title="@string/ciudad_harcodeada11"
-        app:showAsAction="never" />
     <!--
 
     -->

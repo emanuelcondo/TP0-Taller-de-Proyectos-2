@@ -1,17 +1,9 @@
 <resources>
     <string name="app_name">Temperatura</string>
     <string name="ciudades">Ciudades</string>
-    <string name="ciudad_harcodeada">Avellaneda Test</string>
-    <string name="ciudad_harcodeada02">Posadas Test</string>
-    <string name="ciudad_harcodeada03">Madrid Test</string>
-    <string name="ciudad_harcodeada04">Nueva York Test</string>
-    <string name="ciudad_harcodeada05">Oslo Test</string>
-    <string name="ciudad_harcodeada06">Osaka Test</string>
-    <string name="ciudad_harcodeada07">Moscú Test</string>
-    <string name="ciudad_harcodeada08">Calafate Test</string>
-    <string name="ciudad_harcodeada09">Puerto Madryn Test</string>
-    <string name="ciudad_harcodeada10">Quito Test</string>
-    <string name="ciudad_harcodeada11">Bangladesh Test</string>
+    <string name="ciudad_harcodeada">Ciudad Test 0°C</string>
+    <string name="ciudad_harcodeada02">Ciudad Test Nubes</string>
+    <string name="ciudad_harcodeada03">Ciudad Test Clima</string>
 
     <string name="url">http://api.openweathermap.org/data/2.5/forecast</string>
     <string name="appid">13d33da11295c179f0b705613b2d6f18</string>
