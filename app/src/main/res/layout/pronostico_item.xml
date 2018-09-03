@@ -5,55 +5,68 @@
     android:layout_height="wrap_content"
     android:layout_margin="8dp">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:weightSum="3">
 
-        <TextView
-            android:layout_width="85dp"
+        <RelativeLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/dia"
-            android:padding="8dp"
-            android:layout_centerVertical="true"
-            android:textColor="#000000"/>
+            android:layout_weight="1" >
 
-        <ImageView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:padding="4dp"
-            android:id="@+id/imagenDia"
-            android:contentDescription="@string/app_name"
-            android:layout_toRightOf="@id/dia"
-            android:layout_toEndOf="@+id/dia" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/dia"
+                android:padding="8dp"
+                android:layout_centerVertical="true"
+                android:textColor="#000000"/>
 
-        <TextView
-            android:layout_width="wrap_content"
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/tempDia"
-            android:padding="8dp"
-            style="@style/TextAppearance.AppCompat.Subhead"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@id/imagenDia"
-            android:layout_toEndOf="@+id/imagenDia" />
+            android:layout_weight="2" >
 
-        <ImageView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:padding="4dp"
-            android:id="@+id/imagenNoche"
-            android:contentDescription="@string/app_name"
-            android:layout_toRightOf="@id/tempDia"
-            android:layout_toEndOf="@+id/tempDia" />
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:padding="4dp"
+                android:id="@+id/imagenDia"
+                android:contentDescription="@string/app_name" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/tempNoche"
-            android:padding="8dp"
-            style="@style/TextAppearance.AppCompat.Subhead"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@id/imagenNoche"
-            android:layout_toEndOf="@id/imagenNoche" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tempDia"
+                android:padding="8dp"
+                style="@style/TextAppearance.AppCompat.Subhead"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/imagenDia"
+                android:layout_toEndOf="@+id/imagenDia" />
 
-    </RelativeLayout>
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:padding="4dp"
+                android:id="@+id/imagenNoche"
+                android:contentDescription="@string/app_name"
+                android:layout_toRightOf="@id/tempDia"
+                android:layout_toEndOf="@+id/tempDia" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tempNoche"
+                android:padding="8dp"
+                style="@style/TextAppearance.AppCompat.Subhead"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/imagenNoche"
+                android:layout_toEndOf="@id/imagenNoche" />
+
+        </RelativeLayout>
+    </LinearLayout>
 </android.support.v7.widget.CardView>

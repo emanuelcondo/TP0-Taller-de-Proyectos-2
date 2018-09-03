@@ -58,6 +58,9 @@ public class PronosticosListener implements ResponseListener {
             mostrarPronosticos();
             pronosticoAdapter.notifyDataSetChanged();
 
+            //Hago un toast porque sino nadie se entera que se actualizo
+            Toast.makeText(context, "Actualizado!", Toast.LENGTH_SHORT).show();
+
 
         } catch (JSONException e) {
             Log.e("PronosticoListener", e.getMessage());
@@ -68,9 +71,9 @@ public class PronosticosListener implements ResponseListener {
     @Override
     public void onRequestError(int codError, String errorMessage) {
         setPronosticos(pronosticosPrevios);
-        String error = codError + ": " + errorMessage;
-        Log.d("PronosticoListener", error);
-        Toast.makeText(context, error, Toast.LENGTH_LONG).show();
+        //String error = codError + ": " + errorMessage;
+        Log.d("PronosticoListener", errorMessage);
+        Toast.makeText(context, errorMessage, Toast.LENGTH_LONG).show();
     }
 
 
@@ -113,7 +116,7 @@ public class PronosticosListener implements ResponseListener {
                         try {
                             date = new SimpleDateFormat("yyyy-M-d").parse(dateString);//ParseException
                             String dayOfWeek = new SimpleDateFormat("EEEE", new Locale("es")).format(date);
-                            pronosticoParaMostrar.setNombreDia(dayOfWeek.substring(0,1).toUpperCase() + dayOfWeek.substring(1) + ",\n" + diaActual + "/" + mesActual);
+                            pronosticoParaMostrar.setNombreDia(dayOfWeek.substring(0,1).toUpperCase() + dayOfWeek.substring(1) + ", " + diaActual + "/" + mesActual);
                         } catch (ParseException e) {
                             pronosticoParaMostrar.setNombreDia("ErrorParseo");
                         }
@@ -154,7 +157,7 @@ public class PronosticosListener implements ResponseListener {
             try {
                 date = new SimpleDateFormat("yyyy-M-d").parse(dateString);//ParseException
                 String dayOfWeek = new SimpleDateFormat("EEEE", new Locale("es")).format(date);
-                pronosticoParaMostrar.setNombreDia(dayOfWeek.substring(0, 1).toUpperCase() + dayOfWeek.substring(1) + ",\n" + diaActual + "/" + mesActual);
+                pronosticoParaMostrar.setNombreDia(dayOfWeek.substring(0, 1).toUpperCase() + dayOfWeek.substring(1) + ", " + diaActual + "/" + mesActual);
             } catch (ParseException e) {
                 pronosticoParaMostrar.setNombreDia("ErrorParseo");
             }

@@ -123,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
                         try {
                             date = new SimpleDateFormat("yyyy-M-d").parse(dateString);//ParseException
                             String dayOfWeek = new SimpleDateFormat("EEEE", new Locale("es")).format(date);
-                            pronosticoParaMostrar.setNombreDia(dayOfWeek.substring(0,1).toUpperCase() + dayOfWeek.substring(1) + ",\n"  + diaActual + "/" + mesActual);
+                            pronosticoParaMostrar.setNombreDia(dayOfWeek.substring(0,1).toUpperCase() + dayOfWeek.substring(1) + ", "  + diaActual + "/" + mesActual);
                         } catch (ParseException e) {
                             pronosticoParaMostrar.setNombreDia("ErrorParseo");
                         }
@@ -163,7 +163,7 @@ public class MainActivity extends AppCompatActivity {
             try {
                 date = new SimpleDateFormat("yyyy-M-d").parse(dateString);//ParseException
                 String dayOfWeek = new SimpleDateFormat("EEEE", new Locale("es")).format(date);
-                pronosticoParaMostrar.setNombreDia(dayOfWeek.substring(0, 1).toUpperCase() + dayOfWeek.substring(1) + ",\n" + diaActual + "/" + mesActual);
+                pronosticoParaMostrar.setNombreDia(dayOfWeek.substring(0, 1).toUpperCase() + dayOfWeek.substring(1) + ", " + diaActual + "/" + mesActual);
             } catch (ParseException e) {
                 pronosticoParaMostrar.setNombreDia("ErrorParseo");
             }
@@ -292,12 +292,7 @@ public class MainActivity extends AppCompatActivity {
         requestSender.doGet_expectSingleObject(pronosticoslistener, url);
 
         getSupportActionBar().setTitle(nombreCiudadActual);
-
-        //TODO Lautaro: pase la siguiente instruccion al listener porque no funcionaba siempre
-        //pronosticoAdapter.notifyDataSetChanged();
-
-        //Hago un toast porque sino nadie se entera que se actualizo
-        Toast.makeText(this, "Actualizado!", Toast.LENGTH_SHORT).show();
+        
         refreshAnimator.end();
     }
 

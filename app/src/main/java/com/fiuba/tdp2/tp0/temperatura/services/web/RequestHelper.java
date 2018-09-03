@@ -66,14 +66,13 @@ public class RequestHelper {
 
         }
 
-        errorDesc  = errorDesc + ":" +error.getMessage();
         return new Pair<>(codError, errorDesc);
     }
 
     public static Map getHeaders() {
 
         Map headers = new HashMap<>();
-        String auth =  null /*Perfil.token*/;
+        String auth =  null /*token*/;
         headers.put("Content-Type", "application/json");
         if (auth != null) {
             headers.put("Authorization", auth);
