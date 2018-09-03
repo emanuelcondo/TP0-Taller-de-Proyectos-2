@@ -20,12 +20,14 @@ getActualTemp = function (city_id,callback){
 			if (response.statusCode == 200) {
 				var data = response.body
 
+				const date = new Date(data.dt);
+
 				var processedData = {
-					dt_txt: data.dt,
+					dt_txt: "2018-09-03 20:00:00",
 					temp_min: data.main.temp_min,
 					temp_max: data.main.temp_max,
 					humidity: data.main.humidity,
-					image_code: data.code,
+					image_code: data.cod,
 					icon: data.weather[0].icon
 				}
 
@@ -35,8 +37,6 @@ getActualTemp = function (city_id,callback){
 			}
 		}
 	})
-
-
 
 }
 
@@ -81,6 +81,7 @@ function _processData(data,city_id) {
 		if (error) {
 			console.log('No se pude obtener dato de la temp actual');
 		} else {
+			console.log('result de la temp actual',result);
 			list.push(result)
 		}
 	});
