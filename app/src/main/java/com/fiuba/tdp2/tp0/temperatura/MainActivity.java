@@ -132,19 +132,21 @@ public class MainActivity extends AppCompatActivity {
                 ++contadorParaPromediosNoche;
             }
         }
-        String dateString = String.format(Locale.getDefault(), "%d-%d-%d", anioActual, mesActual, diaActual);
-        try {
-            date = new SimpleDateFormat("yyyy-M-d").parse(dateString);//ParseException
-            String dayOfWeek = new SimpleDateFormat("EEEE", new Locale("es")).format(date);
-            pronosticoParaMostrar.setNombreDia(dayOfWeek.substring(0,1).toUpperCase() + dayOfWeek.substring(1) + ",\n"  + diaActual + "/" + mesActual);
-        } catch (ParseException e) {
-            pronosticoParaMostrar.setNombreDia("ErrorParseo");
+        if (pronosticos.size() != 0) {
+            String dateString = String.format(Locale.getDefault(), "%d-%d-%d", anioActual, mesActual, diaActual);
+            try {
+                date = new SimpleDateFormat("yyyy-M-d").parse(dateString);//ParseException
+                String dayOfWeek = new SimpleDateFormat("EEEE", new Locale("es")).format(date);
+                pronosticoParaMostrar.setNombreDia(dayOfWeek.substring(0, 1).toUpperCase() + dayOfWeek.substring(1) + ",\n" + diaActual + "/" + mesActual);
+            } catch (ParseException e) {
+                pronosticoParaMostrar.setNombreDia("ErrorParseo");
+            }
+            pronosticoParaMostrar.setTemperaturaDia(temperaturaDia / contadorParaPromediosDia);
+            pronosticoParaMostrar.setTemperaturaNoche(temperaturaNoche / contadorParaPromediosNoche);
+            pronosticoParaMostrar.setImagenDia(imagenDia);
+            pronosticoParaMostrar.setImagenNoche(imagenNoche);
+            pronosticosParaMostrar.add(pronosticoParaMostrar);
         }
-        pronosticoParaMostrar.setTemperaturaDia(temperaturaDia / contadorParaPromediosDia);
-        pronosticoParaMostrar.setTemperaturaNoche(temperaturaNoche / contadorParaPromediosNoche);
-        pronosticoParaMostrar.setImagenDia(imagenDia);
-        pronosticoParaMostrar.setImagenNoche(imagenNoche);
-        pronosticosParaMostrar.add(pronosticoParaMostrar);
     }
 
     public void refreshPronostico(View view) {
