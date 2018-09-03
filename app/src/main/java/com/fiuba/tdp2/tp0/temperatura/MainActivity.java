@@ -267,11 +267,6 @@ public class MainActivity extends AppCompatActivity {
 
         getSupportActionBar().setTitle(nombreCiudadActual);
 
-        //TODO Lautaro: pase la siguiente instruccion al listener porque no funcionaba siempre
-        //pronosticoAdapter.notifyDataSetChanged();
-
-        //Hago un toast porque sino nadie se entera que se actualizo
-        Toast.makeText(this, "Actualizado!", Toast.LENGTH_SHORT).show();
     }
 
 }

@@ -58,6 +58,9 @@ public class PronosticosListener implements ResponseListener {
             mostrarPronosticos();
             pronosticoAdapter.notifyDataSetChanged();
 
+            //Hago un toast porque sino nadie se entera que se actualizo
+            Toast.makeText(context, "Actualizado!", Toast.LENGTH_SHORT).show();
+
 
         } catch (JSONException e) {
             Log.e("PronosticoListener", e.getMessage());
@@ -68,9 +71,9 @@ public class PronosticosListener implements ResponseListener {
     @Override
     public void onRequestError(int codError, String errorMessage) {
         setPronosticos(pronosticosPrevios);
-        String error = codError + ": " + errorMessage;
-        Log.d("PronosticoListener", error);
-        Toast.makeText(context, error, Toast.LENGTH_LONG).show();
+        //String error = codError + ": " + errorMessage;
+        Log.d("PronosticoListener", errorMessage);
+        Toast.makeText(context, errorMessage, Toast.LENGTH_LONG).show();
     }
 
 
