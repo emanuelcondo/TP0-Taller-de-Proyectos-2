@@ -17,14 +17,12 @@ app.get('/api/cities', function (req, res) {
 })
 
 app.get('/api/weather/forecast/:city_id', function (req, res) {
-
-	console.log('GET /api/weather/forecast/'+req.params.city_id)
-
 	WeatherService.extendedForecast(req.params.city_id, function (error, result) {
 		if (error) {
+			console.log('GET /api/weather/forecast/'+req.params.city_id + ' - 500')
 			res.status(500).json(error)
 		} else {
-			console.log('res.status.200');
+			console.log('GET /api/weather/forecast/'+req.params.city_id + ' - 200')
 			res.status(200).json(result)
 		}
 	});

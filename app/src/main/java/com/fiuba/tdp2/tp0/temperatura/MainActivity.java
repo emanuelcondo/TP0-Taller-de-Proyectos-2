@@ -290,34 +290,38 @@ public class MainActivity extends AppCompatActivity {
      * Cambia los iconos por los diferentes grados de nubes
      */
     private void setNubes() {
-        pronosticosParaMostrar.get(0).setImagenDia(800);
-        pronosticosParaMostrar.get(0).setImagenNoche(800);
-        pronosticosParaMostrar.get(1).setImagenDia(801);
-        pronosticosParaMostrar.get(1).setImagenNoche(801);
-        pronosticosParaMostrar.get(2).setImagenDia(802);
-        pronosticosParaMostrar.get(2).setImagenNoche(802);
-        pronosticosParaMostrar.get(3).setImagenDia(803);
-        pronosticosParaMostrar.get(3).setImagenNoche(803);
-        pronosticosParaMostrar.get(4).setImagenDia(803);
-        pronosticosParaMostrar.get(4).setImagenNoche(803);
-        this.pronosticoDelDiaAdapter.notifyDataSetChanged();
+        if (pronosticosParaMostrar.size() > 3) {
+            pronosticosParaMostrar.get(0).setImagenDia(800);
+            pronosticosParaMostrar.get(0).setImagenNoche(800);
+            pronosticosParaMostrar.get(1).setImagenDia(801);
+            pronosticosParaMostrar.get(1).setImagenNoche(801);
+            pronosticosParaMostrar.get(2).setImagenDia(802);
+            pronosticosParaMostrar.get(2).setImagenNoche(802);
+            pronosticosParaMostrar.get(3).setImagenDia(803);
+            pronosticosParaMostrar.get(3).setImagenNoche(803);
+            pronosticosParaMostrar.get(4).setImagenDia(803);
+            pronosticosParaMostrar.get(4).setImagenNoche(803);
+            this.pronosticoDelDiaAdapter.notifyDataSetChanged();
+        }
     }
 
     /**
      * Cambia los iconos por soleado/lluvia/rayos/nieve/neblina
      */
     private void setCondClimaticas() {
-        pronosticosParaMostrar.get(0).setImagenDia(200);
-        pronosticosParaMostrar.get(0).setImagenNoche(200);
-        pronosticosParaMostrar.get(1).setImagenDia(300);
-        pronosticosParaMostrar.get(1).setImagenNoche(300);
-        pronosticosParaMostrar.get(2).setImagenDia(500);
-        pronosticosParaMostrar.get(2).setImagenNoche(500);
-        pronosticosParaMostrar.get(3).setImagenDia(600);
-        pronosticosParaMostrar.get(3).setImagenNoche(600);
-        pronosticosParaMostrar.get(4).setImagenDia(701);
-        pronosticosParaMostrar.get(4).setImagenNoche(701);
-        this.pronosticoDelDiaAdapter.notifyDataSetChanged();
+        if (pronosticosParaMostrar.size() > 3) {
+            pronosticosParaMostrar.get(0).setImagenDia(200);
+            pronosticosParaMostrar.get(0).setImagenNoche(200);
+            pronosticosParaMostrar.get(1).setImagenDia(300);
+            pronosticosParaMostrar.get(1).setImagenNoche(300);
+            pronosticosParaMostrar.get(2).setImagenDia(500);
+            pronosticosParaMostrar.get(2).setImagenNoche(500);
+            pronosticosParaMostrar.get(3).setImagenDia(600);
+            pronosticosParaMostrar.get(3).setImagenNoche(600);
+            pronosticosParaMostrar.get(4).setImagenDia(701);
+            pronosticosParaMostrar.get(4).setImagenNoche(701);
+            this.pronosticoDelDiaAdapter.notifyDataSetChanged();
+        }
     }
 
 }
