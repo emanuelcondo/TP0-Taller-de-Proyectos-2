@@ -62,7 +62,6 @@ public class PronosticosListener implements ResponseListener {
                 getPronosticos().add(pronostico);
             }
 
-            Log.d("PronosticoListener", "Resultado: " + ((JSONObject)response).getString("cod"));
             mostrarPronosticos();
             pronosticoAdapter.notifyDataSetChanged();
 
