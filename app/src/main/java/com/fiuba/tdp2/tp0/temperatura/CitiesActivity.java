@@ -35,6 +35,7 @@ public class CitiesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cities);
+        this.findViewById(R.id.rel).setBackgroundColor(MainActivity.colorFondo);
 
         toolbar = findViewById(R.id.citiestoolbar);
         setSupportActionBar(toolbar);

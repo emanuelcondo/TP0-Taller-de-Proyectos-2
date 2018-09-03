@@ -3,6 +3,7 @@ package com.fiuba.tdp2.tp0.temperatura;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.PorterDuff;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -26,6 +27,7 @@ import com.fiuba.tdp2.tp0.temperatura.vista.PronosticoDelDiaAdapter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Random;
@@ -52,10 +54,14 @@ public class MainActivity extends AppCompatActivity {
     public static int idCiudadActual = 3435910; //por default se muestra buenos aires
     public static String nombreCiudadActual = "Buenos Aires";
 
+    public static int colorFondo;
+    public static int colorItem;
+    public static int colorLetras;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        setColores();
         refreshBtn = findViewById(R.id.floatingActionButton);
         refreshAnimator = ObjectAnimator.ofFloat(refreshBtn, "rotation", 0f, 360f);
 
@@ -293,6 +299,23 @@ public class MainActivity extends AppCompatActivity {
         requestSender.doGet_expectSingleObject(pronosticoslistener, url);
 
         getSupportActionBar().setTitle(nombreCiudadActual);
+    }
+
+    private void setColores() {
+        Calendar ahora = Calendar.getInstance();
+        int hora = ahora.get(Calendar.HOUR);
+
+        if (hora >= 6 && hora < 20) {
+            colorFondo = getResources().getColor(R.color.colorFondoDia);
+            colorLetras = getResources().getColor(R.color.colorLetrasDia);
+            colorItem = getResources().getColor(R.color.colorItemDia);
+        }
+        else {
+            colorFondo = getResources().getColor(R.color.colorFondoNoche);
+            colorLetras = getResources().getColor(R.color.colorLetrasNoche);
+            colorItem = getResources().getColor(R.color.colorItemNoche);
+        }
+        this.findViewById(R.id.relative).setBackgroundColor(colorFondo);
     }
 
 }

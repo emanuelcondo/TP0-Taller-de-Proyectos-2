@@ -43,6 +43,7 @@ public class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.ViewHolder
         City city = filteredCities.get(i);
         viewHolder.city_id = city.getId();
         viewHolder.cityNameText.setText(city.getName());
+        viewHolder.cityNameText.setTextColor(MainActivity.colorLetras);
     }
 
     @Override

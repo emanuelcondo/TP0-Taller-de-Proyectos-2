@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.fiuba.tdp2.tp0.temperatura.MainActivity;
 import com.fiuba.tdp2.tp0.temperatura.R;
 import com.fiuba.tdp2.tp0.temperatura.dominio.Pronostico;
 import com.fiuba.tdp2.tp0.temperatura.dominio.PronosticoDelDia;
@@ -70,6 +71,12 @@ public class PronosticoDelDiaAdapter extends RecyclerView.Adapter<PronosticoDelD
             tempNocheText = itemView.findViewById(R.id.tempNoche);
             imagenClimaDiaView = itemView.findViewById(R.id.imagenDia);
             imagenClimaNocheView = itemView.findViewById(R.id.imagenNoche);
+
+            // Colores
+            diaText.setTextColor(MainActivity.colorLetras);
+            tempDiaText.setTextColor(MainActivity.colorLetras);
+            tempNocheText.setTextColor(MainActivity.colorLetras);
+            itemView.setBackgroundColor(MainActivity.colorItem);
         }
 
         void bindTo(PronosticoDelDia pronostico){

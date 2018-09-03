@@ -6,4 +6,10 @@
     <color name="colorDefault">#FFFFFF</color>
     <color name="colorBlack">#000000</color>
     <color name="colorDefault1">#7bffffff</color>
+    <color name="colorFondoDia">#b2ebf2</color>
+    <color name="colorItemDia">#f0f4c3</color>
+    <color name="colorLetrasDia">#7b000000</color>
+    <color name="colorFondoNoche">#212121</color>
+    <color name="colorItemNoche">#424242</color>
+    <color name="colorLetrasNoche">#ffffff</color>
 </resources>

@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rel"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".CitiesActivity">
@@ -22,11 +23,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginRight="16dp"
+            android:background="@drawable/input_search"
             android:hint="Ingrese una ciudad"
             android:padding="5dp"
             android:paddingLeft="0dp"
-            android:textColor="#464646"
-            android:background="@drawable/input_search" />
+            android:textColor="#464646" />
     </android.support.v7.widget.Toolbar>
 
     <android.support.v7.widget.RecyclerView
