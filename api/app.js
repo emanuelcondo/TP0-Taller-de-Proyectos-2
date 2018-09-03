@@ -24,6 +24,7 @@ app.get('/api/weather/forecast/:city_id', function (req, res) {
 		if (error) {
 			res.status(500).json(error)
 		} else {
+			console.log('res.status.200');
 			res.status(200).json(result)
 		}
 	});
