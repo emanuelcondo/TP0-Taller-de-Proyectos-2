@@ -256,7 +256,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setColores() {
         Calendar ahora = Calendar.getInstance();
-        int hora = ahora.get(Calendar.HOUR);
+        int hora = ahora.get(Calendar.HOUR_OF_DAY);
 
         if (hora >= 6 && hora < 20) {
             colorFondo = getResources().getColor(R.color.colorFondoDia);
