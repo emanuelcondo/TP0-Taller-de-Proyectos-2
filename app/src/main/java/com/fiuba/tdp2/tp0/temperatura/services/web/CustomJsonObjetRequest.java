@@ -33,7 +33,7 @@ public class CustomJsonObjetRequest extends JsonObjectRequest {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Pair<Integer, String> errorDetail;
-
+                        Log.d("CustomJsonObjectRequest",String.format("error %s",error.toString()));
                         errorDetail = RequestHelper.getError(error);
 
                         listener.onRequestError(errorDetail.t, errorDetail.u);
@@ -61,6 +61,7 @@ public class CustomJsonObjetRequest extends JsonObjectRequest {
 
                             @Override
                             public void onErrorResponse(VolleyError error) {
+                                Log.d("CustomJsonObjectRequest",String.format("error %s",error.toString()));
                                 Pair<Integer, String> errorDetail;
 
                                 errorDetail = RequestHelper.getError(error);

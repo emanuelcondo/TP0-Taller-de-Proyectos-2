@@ -1,5 +1,7 @@
 package com.fiuba.tdp2.tp0.temperatura.services.web;
 
+import android.util.Log;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkError;
 import com.android.volley.NoConnectionError;
@@ -22,6 +24,8 @@ public class RequestHelper {
 
 
         if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+
+            Log.d("RequestHelper", "timeoutError or NoConnectionError");
 
             errorDesc = "No fue posible conectarse al servidor, por favor intente mas tarde. ";
 
