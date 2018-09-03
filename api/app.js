@@ -5,6 +5,9 @@ const WeatherService = require('./services/weather.service')
 const app = express()
 
 app.get('/api/cities', function (req, res) {
+
+	console.log('GET /api/cities'+(req.query.search ? ('?search='+req.query.search) : ''))
+
 	CityService.search(req.query.search, function (err, result) {
 		var data = {
 			cities: result
@@ -14,6 +17,9 @@ app.get('/api/cities', function (req, res) {
 })
 
 app.get('/api/weather/forecast/:city_id', function (req, res) {
+
+	console.log('GET /api/weather/forecast/'+req.params.city_id)
+
 	WeatherService.extendedForecast(req.params.city_id, function (error, result) {
 		if (error) {
 			res.status(500).json(error)
