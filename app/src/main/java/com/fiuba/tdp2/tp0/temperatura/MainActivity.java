@@ -70,6 +70,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 refreshAnimator.start();
+                // Despues si ves lo del callback cambia esto de lugar, pero no me dejes el boton roto mientras amigo
+                refrescarCiudadActual();
             }
         });
 
