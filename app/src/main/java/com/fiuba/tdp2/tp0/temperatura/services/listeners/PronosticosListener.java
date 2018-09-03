@@ -1,6 +1,7 @@
 package com.fiuba.tdp2.tp0.temperatura.services.listeners;
 
 
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
@@ -31,11 +32,17 @@ public class PronosticosListener implements ResponseListener {
     private List<Pronostico> pronosticosPrevios;
     private List<PronosticoDelDia> pronosticosDelDia;
     private PronosticoDelDiaAdapter pronosticoAdapter;
+    private ObjectAnimator refreshAnimator = null;
 
     public PronosticosListener(Context context, PronosticoDelDiaAdapter pronosticoAdapter) {
         this.context = context;
         this.pronosticoAdapter = pronosticoAdapter;
     }
+
+    public void setRefreshAnimator(ObjectAnimator obj) {
+        refreshAnimator = obj;
+    }
+
     @Override
     public void onRequestCompleted(Object response) {
 
@@ -58,6 +65,9 @@ public class PronosticosListener implements ResponseListener {
             mostrarPronosticos();
             pronosticoAdapter.notifyDataSetChanged();
 
+            if (refreshAnimator != null) {
+                refreshAnimator.end();
+            }
             //Hago un toast porque sino nadie se entera que se actualizo
             Toast.makeText(context, "Actualizado!", Toast.LENGTH_SHORT).show();
 

@@ -83,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(pronosticoDelDiaAdapter);
 
         pronosticoslistener = new PronosticosListener(this, pronosticoDelDiaAdapter);
+        pronosticoslistener.setRefreshAnimator(refreshAnimator);
         pronosticoslistener.setPronosticos(pronosticos);
         pronosticoslistener.setPronosticosDelDia(pronosticosParaMostrar);
         refrescarCiudadActual();
@@ -292,8 +293,6 @@ public class MainActivity extends AppCompatActivity {
         requestSender.doGet_expectSingleObject(pronosticoslistener, url);
 
         getSupportActionBar().setTitle(nombreCiudadActual);
-
-        refreshAnimator.end();
     }
 
 }
