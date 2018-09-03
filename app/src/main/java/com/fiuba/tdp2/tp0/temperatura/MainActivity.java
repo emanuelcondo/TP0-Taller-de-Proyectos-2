@@ -1,6 +1,7 @@
 package com.fiuba.tdp2.tp0.temperatura;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -49,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        cargarSharedPrefs();
+
         toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle(nombreCiudadActual);
         setSupportActionBar(toolbar);
@@ -69,6 +72,12 @@ public class MainActivity extends AppCompatActivity {
 
         mostrarPronosticos();
 
+    }
+
+    private void cargarSharedPrefs() {
+        SharedPreferences pref = this.getSharedPreferences("TemperaturaTDP2", 0);
+        nombreCiudadActual = pref.getString("ciudadActual", nombreCiudadActual);
+        idCiudadActual = pref.getInt("idActual", idCiudadActual);
     }
 
     private void mostrarPronosticos() {
