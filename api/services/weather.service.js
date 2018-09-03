@@ -3,6 +3,43 @@ const API_URL = "https://api.openweathermap.org/data/2.5/";
 const API_KEY = "98c74e9b4f81f7e6775d1c7bbd248367"
 //const API = "https://api.openweathermap.org/data/2.5/weather?q=Buenos+Aires&appid=" + API_KEY
 
+
+getActualTemp = function (city_id,callback){
+	var url = API_URL + "weather?id="+city_id+"&units=metric&appid="+API_KEY;
+
+	var options = {
+		url: url,
+		method: 'GET',
+		json: true
+	}
+
+	request(options, function (error, response) {
+		if (error) {
+			callback({ message: 'Unexpected error has occurred. Internal Server Error' })
+		} else {
+			if (response.statusCode == 200) {
+				var data = response.body
+
+				var processedData = {
+					dt_txt: data.dt,
+					temp_min: data.main.temp_min,
+					temp_max: data.main.temp_max,
+					humidity: data.main.humidity,
+					image_code: data.code,
+					icon: data.weather[0].icon
+				}
+
+				callback(null, processedData)
+			} else {
+				callback({ message: 'Unexpected error has occurred.' })
+			}
+		}
+	})
+
+
+
+}
+
 module.exports.extendedForecast = function (city_id, callback) {
 	var url = API_URL + "forecast?id="+city_id+"&units=metric&appid="+API_KEY;
 
@@ -19,7 +56,7 @@ module.exports.extendedForecast = function (city_id, callback) {
 			if (response.statusCode == 200) {
 				var data = response.body
 
-				var processedData = _processData(data)
+				var processedData = _processData(data,city_id)
 
 				callback(null, processedData)
 			} else {
@@ -29,7 +66,7 @@ module.exports.extendedForecast = function (city_id, callback) {
 	})
 }
 
-function _processData(data) {
+function _processData(data,city_id) {
 
 	var city = {
 		id: data.city.id,
@@ -38,6 +75,15 @@ function _processData(data) {
 	}
 
 	var list = []
+
+
+	getActualTemp(city_id,function (error, result) {
+		if (error) {
+			console.log('No se pude obtener dato de la temp actual');
+		} else {
+			list.push(result)
+		}
+	});
 
 	for (var i = 0; i < data.list.length; i++) {
 		var item = data.list[i]
