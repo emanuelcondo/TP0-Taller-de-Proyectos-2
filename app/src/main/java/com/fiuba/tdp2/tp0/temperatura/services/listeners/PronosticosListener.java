@@ -82,7 +82,10 @@ public class PronosticosListener implements ResponseListener {
     public void onRequestError(int codError, String errorMessage) {
         setPronosticos(pronosticosPrevios);
         //String error = codError + ": " + errorMessage;
-        Log.d("PronosticoListener", errorMessage);
+        Log.d("PronosticoListenerR", errorMessage);
+        if (refreshAnimator != null) {
+            refreshAnimator.end();
+        }
         Toast.makeText(context, errorMessage, Toast.LENGTH_LONG).show();
     }
 

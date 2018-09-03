@@ -14,6 +14,7 @@ import android.util.SparseArray;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
 
 import com.fiuba.tdp2.tp0.temperatura.dominio.Pronostico;
 import com.fiuba.tdp2.tp0.temperatura.dominio.PronosticoDelDia;
@@ -62,12 +63,13 @@ public class MainActivity extends AppCompatActivity {
         setColores();
         refreshBtn = findViewById(R.id.floatingActionButton);
         refreshAnimator = ObjectAnimator.ofFloat(refreshBtn, "rotation", 0f, 360f);
-
+        refreshAnimator.setDuration(800);
+        refreshAnimator.setStartDelay(0);
+        refreshAnimator.setRepeatCount(Animation.INFINITE);
         refreshBtn.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                refreshAnimator.start();
                 // Despues si ves lo del callback cambia esto de lugar, pero no me dejes el boton roto mientras amigo
                 refrescarCiudadActual();
             }
@@ -244,6 +246,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void refrescarCiudadActual() {
+        refreshAnimator.start();
         RequestSender requestSender = new RequestSender(this);
         String hostServer = getString(R.string.host);
         String baseUrl = getString(R.string.base_url);

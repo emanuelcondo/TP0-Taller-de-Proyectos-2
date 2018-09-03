@@ -98,9 +98,10 @@ function _processData(data,city_id,callback) {
 			list: list
 		}
 
-		callback(result)
+		callback(null, result)
 	}).catch(function(error){
 		console.log('error',error);
+		callback(error);
 	})
 
 
