@@ -17,7 +17,6 @@ import org.json.JSONObject;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -41,27 +40,6 @@ public class PronosticosListener implements ResponseListener {
     public void onRequestCompleted(Object response) {
 
         Log.d("PronosticosListener", response.toString());
-        /*
-        JSONArray array = (JSONArray)response;
-
-        for (int i = 0; i < array.length(); i++) {
-            try {
-
-                //Log.d("ActividadesListener", "Actividad " + i);
-                Pronostico pronostico = PronosticoFactory.fromJSONObject(array.getJSONObject(i));
-                getPronosticos().add(pronostico);
-                //Perfil.agregarActividad(actividad);
-
-            } catch (JSONException e) {
-                Log.d("ActividadesListener", e.getMessage());
-                Toast.makeText(context, "Error ActividadesListener: " + e.getMessage(), Toast.LENGTH_LONG).show();
-            }
-
-        }
-
-        Log.d("ActividadesListener", response.toString());
-        */
-        //Toast.makeText(context, response.toString(), Toast.LENGTH_LONG).show();
 
         pronosticosPrevios = getPronosticos();
         getPronosticos().clear();
@@ -108,7 +86,6 @@ public class PronosticosListener implements ResponseListener {
         this.pronosticosDelDia = pronosticosDelDia;
     }
 
-    // TODO: cachear esta excepcion adentro y no hacer nada
     private void mostrarPronosticos() {
         PronosticoDelDia pronosticoParaMostrar = new PronosticoDelDia();
         int diaActual = -1;
