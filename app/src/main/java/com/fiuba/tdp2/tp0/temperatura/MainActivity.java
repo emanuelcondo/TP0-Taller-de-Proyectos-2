@@ -31,6 +31,7 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final int NUMERO_MAXIMO_DE_PRONOSTICOS_A_MOSTRAR = 5;
     private RecyclerView recyclerView;
     private Toolbar toolbar;
     private FloatingActionButton refreshBtn;
@@ -164,7 +165,7 @@ public class MainActivity extends AppCompatActivity {
                 ++contadorParaPromediosNoche;
             }
         }
-        if (pronosticos.size() != 0) {
+        if (pronosticos.size() != 0 && pronosticos.size() < NUMERO_MAXIMO_DE_PRONOSTICOS_A_MOSTRAR) {
             String dateString = String.format(Locale.getDefault(), "%d-%d-%d", anioActual, mesActual, diaActual);
             try {
                 date = new SimpleDateFormat("yyyy-M-d").parse(dateString);//ParseException

@@ -26,6 +26,7 @@ import java.util.Locale;
 
 public class PronosticosListener implements ResponseListener {
 
+    private static final int NUMERO_MAXIMO_DE_PRONOSTICOS_A_MOSTRAR = 5;
     private Context context;
 
     private List<Pronostico> pronosticos;
@@ -162,7 +163,7 @@ public class PronosticosListener implements ResponseListener {
                 ++contadorParaPromediosNoche;
             }
         }
-        if (pronosticos.size() != 0) {
+        if (pronosticos.size() != 0 && pronosticos.size() < NUMERO_MAXIMO_DE_PRONOSTICOS_A_MOSTRAR) {
             String dateString = String.format(Locale.getDefault(), "%d-%d-%d", anioActual, mesActual, diaActual);
             try {
                 date = new SimpleDateFormat("yyyy-M-d").parse(dateString);//ParseException
