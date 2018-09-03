@@ -52,93 +52,9 @@ function _processData(data) {
 		list.push(tmp)
 	}
 
-	/*
-	{
-		nombreDia: string
-		imagenDia: int
-		imagenNoche: int
-		temperaturaDia: float
-		temperaturaNoche: float
-		hayDataDelDia: boolean
-
-	}
-	*/
-
-	var currentDay = -1, currentMonth = -1, currentYear = -1
-	var dayTemp = 0, nightTemp = 0
-	var dayImage = 0, nightImage = 0
-	var dayAVGCount = 0
-	var nightAVGCount = 0
-	var forecastDaysCount = 0
-	var DAYS = [ 'HOY', 'MAÑANA' ]
-	var WEEKDAYS = [ 'DOMINGO', 'LUNES', 'MARTES', 'MIÉRCOLES', 'JUEVES', 'VIERNES', 'SÁBADO' ]
-
-	var forecast = []
-
-	for (var i = 0; i < list.length; i ++) {
-		var aux = {}
-
-		var item = list[i]
-		var day = parseInt(item.dt_txt.substring(8,10))
-		var month = parseInt(item.dt_txt.substring(5,7))
-		var year = parseInt(item.dt_txt.substring(0,4))
-		var hour = parseInt(item.dt_txt.substring(11,13))
-
-		if (day != currentDay) {
-			if (nightAVGCount != 0) {
-				if (forecastDaysCount == 0 || forecastDaysCount == 1) {
-					aux.nombreDia = DAYS[forecastDaysCount]
-				} else {
-					var today = new Date()
-					aux.nombreDia = WEEKDAYS[today.getDay()]
-				}
-
-				if (dayAVGCount == 0) {
-					aux.hayDataDelDia = false
-				} else {
-					aux.temperaturaDia = (dayTemp / dayAVGCount)
-				}
-
-				aux.temperaturaNoche = (nightTemp / nightAVGCount)
-				aux.imagenDia = dayImage
-				aux.imagenNoche = nightImage
-				forecast.push(aux)
-				dayTemp = 0
-				nightTemp = 0
-				dayAVGCount = 0
-				nightAVGCount = 0
-				forecastDaysCount += 1
-			}
-
-			currentDay = day
-			currentMonth = month
-			currentYear = year
-		}
-
-		if (hour >= 6 && hour < 20) {
-			dayTemp += ((item.temp_max + item.temp_min) / 2)
-			dayImage = item.image_code
-			dayAVGCount += 1
-		} else {
-			nightTemp += ((item.temp_max + item.temp_min) / 2)
-			nightImage = item.image_code
-			nightAVGCount += 1
-		}
-	}
-
-	var today = new Date()
-	var last = {
-		nombreDia: WEEKDAYS[today.getDay()],
-		imagenDia: dayImage,
-		imagenNoche: nightImage,
-		temperaturaDia: (dayTemp / dayAVGCount),
-		temperaturaNoche: (nightTemp / nightAVGCount),
-		hayDataDelDia: true
-	}
-
 	var result = {
 		city: city,
-		list: forecast
+		list: list
 	}
 
 	return result
