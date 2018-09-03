@@ -12,18 +12,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-
         android:background="@color/colorPrimary"
         android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme">
+        android:theme="?attr/actionBarTheme"
+        app:theme="@style/ToolbarTheme">
 
         <EditText
             android:id="@+id/myEditText"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginRight="8dp"
-            android:textColor="@color/colorDefault"
-            android:background="@null" />
+            android:layout_marginRight="16dp"
+            android:hint="Ingrese una ciudad"
+            android:padding="5dp"
+            android:paddingLeft="0dp"
+            android:textColor="#464646"
+            android:background="@drawable/input_search" />
     </android.support.v7.widget.Toolbar>
 
     <android.support.v7.widget.RecyclerView

@@ -292,7 +292,7 @@ public class MainActivity extends AppCompatActivity {
         requestSender.doGet_expectSingleObject(pronosticoslistener, url);
 
         getSupportActionBar().setTitle(nombreCiudadActual);
-        
+
         refreshAnimator.end();
     }
 

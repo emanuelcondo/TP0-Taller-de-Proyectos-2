@@ -9,6 +9,7 @@
         android:id="@+id/city_name"
         android:layout_width="match_parent"
         android:layout_height="30dp"
+        android:textSize="40px"
         android:gravity="center_vertical"
         android:text="TextView" />
 </RelativeLayout>
