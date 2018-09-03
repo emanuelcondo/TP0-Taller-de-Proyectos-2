@@ -11,6 +11,7 @@ import android.util.SparseArray;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.fiuba.tdp2.tp0.temperatura.dominio.Pronostico;
 import com.fiuba.tdp2.tp0.temperatura.dominio.PronosticoDelDia;
@@ -131,26 +132,25 @@ public class MainActivity extends AppCompatActivity {
                 ++contadorParaPromediosNoche;
             }
         }
-        String dateString = String.format(Locale.getDefault(), "%d-%d-%d", anioActual, mesActual, diaActual);
-        try {
-            date = new SimpleDateFormat("yyyy-M-d").parse(dateString);//ParseException
-            String dayOfWeek = new SimpleDateFormat("EEEE", new Locale("es")).format(date);
-            pronosticoParaMostrar.setNombreDia(dayOfWeek.substring(0,1).toUpperCase() + dayOfWeek.substring(1) + ",\n"  + diaActual + "/" + mesActual);
-        } catch (ParseException e) {
-            pronosticoParaMostrar.setNombreDia("ErrorParseo");
+        if (pronosticos.size() != 0) {
+            String dateString = String.format(Locale.getDefault(), "%d-%d-%d", anioActual, mesActual, diaActual);
+            try {
+                date = new SimpleDateFormat("yyyy-M-d").parse(dateString);//ParseException
+                String dayOfWeek = new SimpleDateFormat("EEEE", new Locale("es")).format(date);
+                pronosticoParaMostrar.setNombreDia(dayOfWeek.substring(0, 1).toUpperCase() + dayOfWeek.substring(1) + ",\n" + diaActual + "/" + mesActual);
+            } catch (ParseException e) {
+                pronosticoParaMostrar.setNombreDia("ErrorParseo");
+            }
+            pronosticoParaMostrar.setTemperaturaDia(temperaturaDia / contadorParaPromediosDia);
+            pronosticoParaMostrar.setTemperaturaNoche(temperaturaNoche / contadorParaPromediosNoche);
+            pronosticoParaMostrar.setImagenDia(imagenDia);
+            pronosticoParaMostrar.setImagenNoche(imagenNoche);
+            pronosticosParaMostrar.add(pronosticoParaMostrar);
         }
-        pronosticoParaMostrar.setTemperaturaDia(temperaturaDia / contadorParaPromediosDia);
-        pronosticoParaMostrar.setTemperaturaNoche(temperaturaNoche / contadorParaPromediosNoche);
-        pronosticoParaMostrar.setImagenDia(imagenDia);
-        pronosticoParaMostrar.setImagenNoche(imagenNoche);
-        pronosticosParaMostrar.add(pronosticoParaMostrar);
     }
 
     public void refreshPronostico(View view) {
-        goToCities();
-
-        //TODO: el siguiente metodo es el que posta hay que ejecutar acá: descomentar
-        //refrescarCiudadActual();
+        refrescarCiudadActual();
     }
 
 
@@ -172,8 +172,9 @@ public class MainActivity extends AppCompatActivity {
 
 
         switch (id) {
-            case R.id.action_settings:
-                Log.d("MainActivity", "Clic en configuracion");
+            case R.id.ciudades:
+                Log.d("MainActivity", "Clic en ciudades");
+                goToCities();
                 break;
             case R.id.harcodeada:
                 Log.d("MainActivity", "Clic en ciudad harcodeada");
@@ -268,6 +269,9 @@ public class MainActivity extends AppCompatActivity {
 
         //TODO Lautaro: pase la siguiente instruccion al listener porque no funcionaba siempre
         //pronosticoAdapter.notifyDataSetChanged();
+
+        //Hago un toast porque sino nadie se entera que se actualizo
+        Toast.makeText(this, "Actualizado!", Toast.LENGTH_SHORT).show();
     }
 
 }
