@@ -18,6 +18,7 @@ import org.json.JSONObject;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -29,7 +30,7 @@ public class PronosticosListener implements ResponseListener {
     private static final int NUMERO_MAXIMO_DE_PRONOSTICOS_A_MOSTRAR = 5;
     private Context context;
 
-    private List<Pronostico> pronosticos;
+    private List<Pronostico> pronosticos = new ArrayList<>();
     private List<Pronostico> pronosticosPrevios;
     private List<PronosticoDelDia> pronosticosDelDia;
     private PronosticoDelDiaAdapter pronosticoAdapter;
@@ -57,7 +58,7 @@ public class PronosticosListener implements ResponseListener {
 
             for (int i = 0; i < allForecasts.length(); i++) {
                 jsonObject = allForecasts.getJSONObject(i);
-                Log.d("PronosticoListener", "Item: " + jsonObject.getString("dt_txt"));
+                //Log.d("PronosticoListener", "Item: " + jsonObject.getString("dt_txt"));
                 Pronostico pronostico = PronosticoFactory.fromJSONObject(jsonObject);
                 getPronosticos().add(pronostico);
             }
@@ -80,9 +81,13 @@ public class PronosticosListener implements ResponseListener {
 
     @Override
     public void onRequestError(int codError, String errorMessage) {
-        setPronosticos(pronosticosPrevios);
+        if (pronosticosPrevios != null)
+            setPronosticos(pronosticosPrevios);
         //String error = codError + ": " + errorMessage;
-        Log.d("PronosticoListener", errorMessage);
+        Log.d("PronosticoListenerR", errorMessage);
+        if (refreshAnimator != null) {
+            refreshAnimator.end();
+        }
         Toast.makeText(context, errorMessage, Toast.LENGTH_LONG).show();
     }
 

@@ -30,7 +30,7 @@ getActualTemp = function (city_id){
 							image_code: data.cod,
 							icon: data.weather[0].icon
 						}
-						console.log('processedData',processedData);
+						//console.log('processedData',processedData);
 						resolve(processedData)
 					} else {
 						reject({ message: 'Unexpected error has occurred.' })
@@ -66,7 +66,7 @@ module.exports.extendedForecast = function (city_id, callback) {
 
 function _processData(data,city_id,callback) {
 
-	console.log("_processData");
+	//console.log("_processData");
 
 	var city = {
 		id: data.city.id,
@@ -77,7 +77,7 @@ function _processData(data,city_id,callback) {
 	var list = []
 
 	getActualTemp(city_id).then(function(response){
-		console.log('dentro del then');
+		//console.log('dentro del then');
 		list.push(response)
 
 		for (var i = 0; i < data.list.length; i++) {
@@ -98,9 +98,10 @@ function _processData(data,city_id,callback) {
 			list: list
 		}
 
-		callback(result)
+		callback(null, result)
 	}).catch(function(error){
 		console.log('error',error);
+		callback(error);
 	})
 
 

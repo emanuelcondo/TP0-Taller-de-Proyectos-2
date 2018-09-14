@@ -5,7 +5,7 @@
     <string name="ciudad_harcodeada02">Ciudad Test Nubes</string>
     <string name="ciudad_harcodeada03">Ciudad Test Clima</string>
 
-    <string name="host">http://110.254.33.21:3000/</string>
+    <string name="host">http://172.20.10.3:3000/</string>
     <string name="base_url">api/weather/forecast/</string>
 
     <array name="imagenes_clima">

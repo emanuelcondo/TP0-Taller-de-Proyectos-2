@@ -34,7 +34,7 @@ public  class PronosticoFactory {
         pronostico.setTemperaturaMaxima(jsonPronostico.getDouble("temp_max"));
         pronostico.setImagen(jsonPronostico.getInt("image_code"));
 
-        Log.d("PronosticoFactory", pronostico.toString());
+        //Log.d("PronosticoFactory", pronostico.toString());
         return pronostico;
 
     }
